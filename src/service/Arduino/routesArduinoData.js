@@ -1,5 +1,4 @@
-const data = require("./dataManagement");
-//const app = require("./server");
+const data = require("./arduinoData");
 
 module.exports = {
     
