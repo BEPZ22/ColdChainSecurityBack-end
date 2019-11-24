@@ -5,11 +5,11 @@ let data =
 
 module.exports = {
 
-    getData : function(req, res){
+    getData2 : function(req, res){
         res.send(data);
     },
 
-    addData : function( req, res) {
+    addData2 : function( req, res) {
         var latitud = req.body.lat;
         var longitud = req.body.lng;
         console.log(req.body.lat, req.body.lng);
