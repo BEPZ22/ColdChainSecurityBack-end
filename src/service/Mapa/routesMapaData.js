@@ -1,4 +1,3 @@
-
 const data2 = require("./mapaData");
 
 module.exports = {
