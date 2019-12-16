@@ -1,7 +1,15 @@
 let data = 
-        [
-            {"name" : "Yo", "lastname": "jeje"},
-        ];
+        [{
+            'ip': "192.168.1.1",
+            'long':  10.485043,
+            'lat': -66.804953,
+            'temp': 33,
+            'date': {
+                        'date': ""
+                    }
+            
+            
+        },];
 
 module.exports = {
 
@@ -10,10 +18,18 @@ module.exports = {
     },
 
     addData : function( req, res) {
-        var nombre = req.body.name;
-        var apellido = req.body.lastname;
-        console.log(req.body.name, req.body.lastname);
-        data.push({'name': nombre,'lastname': apellido});
+        var ip = req.body.ip;
+        var longitud = req.body.long;
+        var latitud = req.body.lat;
+        var temperatura = req.body.temp;
+        var fecha = req.body.date;
+        
+        data.push({'ip': ip,
+                   'long': longitud,
+                   'lat': latitud,
+                   'temp': temperatura,
+                   'date': fecha
+                });
         res.send(data);
     }
 
