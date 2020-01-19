@@ -1,7 +1,5 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const routesArduino = require("./src/service/Arduino/routesArduinoData");
-const routesMapa = require("./src/service/Mapa/routesMapaData");
 const routes = require("./src/service/routes");
 const app = express();
 const PORT = process.env.PORT || 3000;
