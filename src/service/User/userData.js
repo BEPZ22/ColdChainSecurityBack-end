@@ -11,7 +11,7 @@ const pool = new Pool({
 module.exports = {
 
     getData : function(req, res){
-        res.send(data);
+        res.send("hola jejeje");
     },
 
     createUser : function (req, res){
