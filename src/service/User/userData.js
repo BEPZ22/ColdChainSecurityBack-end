@@ -7,18 +7,27 @@ const pool = new Pool({
   password: process.env.DATABASE_PASSWORD,
   port: process.env.DATABASE_PORT,
 });
-
+//$3integer
+const createUser = "SELECT create_user($1 , $2 , $3 , $4 , $5 , $6);";
 module.exports = {
 
     getData : function(req, res){
         res.send("hola jejeje");
     },
 
+    getAllUsers : function(req, res){
+      res.send("hola jejeje");
+    },
+
+    getUserByID : function(req, res){
+      res.send("hola jejeje");
+    },
+
     createUser : function (req, res){
 
         const { nombre, apellido, cedula, cargo, username, password } = req.body
 
-        pool.query('INSERT INTO usuario (usu_nombre, usu_apellido, usu_cedula, usu_cargo, usu_usuario, usu_contrasena) VALUES ($1, $2, $3, $4, $5, $6)', 
+        pool.query( createUser , 
                     [
                         nombre, 
                         apellido, 
@@ -27,7 +36,7 @@ module.exports = {
                         username, 
                         password
                     ],
-                        (error, results) => {
+          (error, results) => {
             if (error) {
               throw error
             }
