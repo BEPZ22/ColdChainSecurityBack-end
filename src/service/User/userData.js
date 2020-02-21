@@ -8,7 +8,13 @@ const pool = new Pool({
   port: process.env.DATABASE_PORT,
 });
 //$3integer
-const createUser = "SELECT create_user($1 , $2 , $3 , $4 , $5 , $6);";
+const _createUser = "SELECT create_user($1 , $2 , $3 , $4 , $5 , $6);";
+const _getUserByID = "";
+const _getAllUsers = "";
+const _updateUser = "";
+const _deleteUser = "";
+
+
 module.exports = {
 
     getData : function(req, res){
@@ -27,7 +33,7 @@ module.exports = {
 
         const { nombre, apellido, cedula, cargo, username, password } = req.body
 
-        pool.query( createUser , 
+        pool.query( _createUser , 
                     [
                         nombre, 
                         apellido, 
@@ -36,12 +42,14 @@ module.exports = {
                         username, 
                         password
                     ],
-          (error, results) => {
-            if (error) {
-              throw error
-            }
-            res.status(201).send(`User added with ID: ${result.insertId}`)
-          });
+                      (error, results) => {
+                        if (error) {
+                          throw error
+                        }
+                        res.status(201).send(`User added with ID: ${result.insertId}`)
+                      });
+
+       res.status(200).send('Usuario registrado exitosamente')
     },
 
 
