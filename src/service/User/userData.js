@@ -15,8 +15,13 @@ const _updateUser = "SELECT update_user($1 , $2 , $3 , $4 , $5 , $6);";
 const _deleteUser = "";
 
 const getUsers_ = async(req, res) => {
-  const response = await pool.query(_getAllUsers);
-  res.status(200).json(response.rows);
+  try {
+    const response = await pool.query(_getAllUsers);
+    res.status(200).json(response.rows);
+  } catch (error) {
+    res.status(404).send(error);
+  }
+
 }
 
 module.exports = {
