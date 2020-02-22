@@ -22,12 +22,13 @@ module.exports = {
     },
 
     getAllUsers : function(req, res){
-      pool.query(_getAllUsers,(error, results) => {
-        if (error) {
-          throw error
-        }
-        res.status(200).json(results.rows)
-      })
+      // pool.query(_getAllUsers,(error, results) => {
+      //   if (error) {
+      //     throw error
+      //   }
+      //   res.status(200).json(results.rows)
+      // })
+      res.send("hola jejeje");
     },
 
     getUserByID : function(req, res){
