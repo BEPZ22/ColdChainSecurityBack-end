@@ -31,7 +31,7 @@ module.exports = {
       // res.send("hola jejeje");
       pool.query(_getAllUsers)
         .then(response => {
-            res.status(200).json(response.rows);
+            res.status(200).send(response.rows);
             pool.end()
         })
         .catch(err => {
