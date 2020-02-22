@@ -70,7 +70,7 @@ module.exports = {
                         if (error) {
                           throw error
                         }
-                        res.status(201).send(`User added with ID: ${result.insertId}`)
+                        // res.status(201).send(`User added with ID: ${result.insertId}`)
                       });                   
        res.status(200).send('Usuario registrado exitosamente')
     },
