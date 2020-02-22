@@ -10,8 +10,8 @@ const pool = new Pool({
 //$3integer
 const _createUser = "SELECT create_user($1 , $2 , $3 , $4 , $5 , $6);";
 const _getUserByID = "";
-const _getAllUsers = "";
-const _updateUser = "";
+const _getAllUsers = "SELECT * FROM users;";
+const _updateUser = "SELECT update_user($1 , $2 , $3 , $4 , $5 , $6);";
 const _deleteUser = "";
 
 
@@ -22,7 +22,12 @@ module.exports = {
     },
 
     getAllUsers : function(req, res){
-      res.send("hola jejeje");
+      pool.query(_getAllUsers,(error, results) => {
+        if (error) {
+          throw error
+        }
+        res.status(200).json(results.rows)
+      })
     },
 
     getUserByID : function(req, res){
@@ -47,8 +52,7 @@ module.exports = {
                           throw error
                         }
                         res.status(201).send(`User added with ID: ${result.insertId}`)
-                      });
-
+                      });                   
        res.status(200).send('Usuario registrado exitosamente')
     },
 
