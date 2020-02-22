@@ -10,7 +10,7 @@ const pool = new Pool({
 //$3integer
 const _createUser = "SELECT create_user($1 , $2 , $3 , $4 , $5 , $6);";
 const _getUserByID = "";
-const _getAllUsers = ;
+// const _getAllUsers = "";
 const _updateUser = "SELECT update_user($1 , $2 , $3 , $4 , $5 , $6);";
 const _deleteUser = "";
 
@@ -38,15 +38,15 @@ module.exports = {
       //   res.status(200).send(results.rows)
       // })
       // res.send("hola jejeje");
-      pool.query(_getAllUsers)
-        .then(response => {
-            res.status(200).send(response.rows);
-            pool.end()
-        })
-        .catch(err => {
-          res.status(404).send('No se encontro informacion')
-          pool.end()
-        })
+      // pool.query(_getAllUsers)
+      //   .then(response => {
+      //       res.status(200).send(response.rows);
+      //       pool.end()
+      //   })
+      //   .catch(err => {
+      //     res.status(404).send('No se encontro informacion')
+      //     pool.end()
+      //   })
       
     },
 
