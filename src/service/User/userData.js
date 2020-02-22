@@ -30,14 +30,14 @@ module.exports = {
       // })
       // res.send("hola jejeje");
       pool.query(_getAllUsers)
-    .then(response => {
-        res.status(200).json(response.rows);
-        pool.end()
-    })
-    .catch(err => {
-      res.status(404).send('No se encontro informacion')
-      pool.end()
-    })
+        .then(response => {
+            res.status(200).json(response.rows);
+            pool.end()
+        })
+        .catch(err => {
+          res.status(404).send('No se encontro informacion')
+          pool.end()
+        })
     },
 
     getUserByID : function(req, res){
