@@ -17,7 +17,7 @@ const _deleteUser = "";
 const getUsers_ = async(req, res) => {
   try {
     const response = await pool.query(_getAllUsers);
-    res.status(200).json(response.rows);
+    res.status(200).send(response.rows);
   } catch (error) {
     res.status(404).send(error);
   }
