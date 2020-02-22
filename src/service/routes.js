@@ -7,7 +7,7 @@ module.exports = {
         
         app.get('/arduino', arduino.getData);
         app.post('/arduino', arduino.addData);
-        app.get('/prueba', user.getAllUsers);
+        app.get('/prueba', user.getUsers_);
         app.get('/usuario', user.getData);
         app.post('/usuario', user.createUser);
   
