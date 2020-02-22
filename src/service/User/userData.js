@@ -22,22 +22,23 @@ module.exports = {
     },
 
     getAllUsers : function(req, res){
-      // pool.query(_getAllUsers,(error, results) => {
-      //   if (error) {
-      //     throw error
-      //   }
-      //   res.status(200).json(results.rows)
-      // })
+      pool.query(_getAllUsers,(error, results) => {
+        if (error) {
+          throw error
+        }
+        res.status(200).json(results.rows)
+      })
+      
       // res.send("hola jejeje");
-      pool.query(_getAllUsers)
-        .then(response => {
-            res.status(200).send(response.rows);
-            pool.end()
-        })
-        .catch(err => {
-          res.status(404).send('No se encontro informacion')
-          pool.end()
-        })
+      // pool.query(_getAllUsers)
+      //   .then(response => {
+      //       res.status(200).send(response.rows);
+      //       pool.end()
+      //   })
+      //   .catch(err => {
+      //     res.status(404).send('No se encontro informacion')
+      //     pool.end()
+      //   })
     },
 
     getUserByID : function(req, res){
