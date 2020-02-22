@@ -10,13 +10,13 @@ const pool = new Pool({
 //$3integer
 const _createUser = "SELECT create_user($1 , $2 , $3 , $4 , $5 , $6);";
 const _getUserByID = "";
-const _getAllUsers = "SELECT * FROM users;";
+const _getAllUsers = ;
 const _updateUser = "SELECT update_user($1 , $2 , $3 , $4 , $5 , $6);";
 const _deleteUser = "";
 
 const getUsers_ = async(req, res) => {
   try {
-    const response = await pool.query(_getAllUsers);
+    const response = await pool.query("SELECT * FROM usuario;");
     res.status(200).send(response.rows);
   } catch (error) {
     res.status(404).send(error);
