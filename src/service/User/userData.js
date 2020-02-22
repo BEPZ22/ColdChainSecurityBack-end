@@ -14,13 +14,9 @@ const _getAllUsers = "SELECT * FROM users;";
 const _updateUser = "SELECT update_user($1 , $2 , $3 , $4 , $5 , $6);";
 const _deleteUser = "";
 
-const getUsers_ = (request, response) => {
-  pool.query(_getAllUsers, (error, results) => {
-    if (error) {
-      throw error
-    }
-    response.status(200).json(results.rows)
-  })
+const getUsers_ = async(req, res) => {
+  const response = await pool.query(_getAllUsers);
+  res.status(200).json(response.rows);
 }
 
 module.exports = {
@@ -29,25 +25,25 @@ module.exports = {
         res.send("hola jejeje");
     },
 
-    // getAllUsers : function(req, res){
-    //   // pool.query(_getAllUsers,(error, results) => {
-    //   //   if (error) {
-    //   //     throw error
-    //   //   }
-    //   //   res.status(200).send(results.rows)
-    //   // })
-    //   // res.send("hola jejeje");
-    //   pool.query(_getAllUsers)
-    //     .then(response => {
-    //         res.status(200).send(response.rows);
-    //         pool.end()
-    //     })
-    //     .catch(err => {
-    //       res.status(404).send('No se encontro informacion')
-    //       pool.end()
-    //     })
+    getAllUsers : function(req, res){
+      // pool.query(_getAllUsers,(error, results) => {
+      //   if (error) {
+      //     throw error
+      //   }
+      //   res.status(200).send(results.rows)
+      // })
+      // res.send("hola jejeje");
+      pool.query(_getAllUsers)
+        .then(response => {
+            res.status(200).send(response.rows);
+            pool.end()
+        })
+        .catch(err => {
+          res.status(404).send('No se encontro informacion')
+          pool.end()
+        })
       
-    // },
+    },
 
     getUserByID : function(req, res){
       res.send("hola jejeje");
