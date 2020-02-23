@@ -23,7 +23,7 @@ const getUsers_ = async(req, res) => {
   }
 }
 
-const getUserById_ = (req, res) => {
+const getUserById_ = async (req, res) => {
   const id = parseInt(req.body.cedula)
 
   // pool.query(_getUserByID, [id], (error, results) => {
