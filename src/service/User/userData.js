@@ -8,11 +8,11 @@ const pool = new Pool({
   port: process.env.DATABASE_PORT,
 });
 //$3integer
-const _createUser = "SELECT create_user($1 , $2 , $3 , $4 , $5 , $6);";
+const _createUser = "SELECT create_user( $1 , $2 , $3 , $4 , $5 , $6 );";
 const _getUserByID = "SELECT * FROM usuario WHERE usu_cedula = $1";
 // const _getAllUsers = "";
-const _updateUser = "SELECT update_user($1 , $2 , $3 , $4 , $5 , $6);";
-const _deleteUser = "";
+const _updateUser = "SELECT update_user( $1 , $2 , $3 , $4 , $5 , $6 );";
+const _deleteUser = "SELECT delete_user( $1 );";
 
 const getUsers_ = async(req, res) => {
   try {
@@ -25,17 +25,24 @@ const getUsers_ = async(req, res) => {
 
 const getUserById_ = async (req, res) => {
   const { cedula } = req.body
-
-  // pool.query(_getUserByID, [id], (error, results) => {
-  //   if (error) {
-  //     throw error
-  //   }
-  //   response.status(200).json(results.rows)
-  // })
-
   try {
     const response = await pool.query(_getUserByID, [cedula]);
     res.status(200).send(response.rows);
+  } catch (error) {
+    res.status(404).send(error);
+  }
+}
+
+const updateUser_ = async (req, res) => {
+  const { nombre, apellido, cedula, cargo, username, password } = req.body
+  try {
+    const response = await pool.query(_updateUser, [ nombre,
+                                                     apellido,
+                                                     cedula,
+                                                     cargo,
+                                                     username,
+                                                     password]);
+    res.status(200).send('Usuario actualizado exitosamente');
   } catch (error) {
     res.status(404).send(error);
   }
@@ -92,28 +99,9 @@ module.exports = {
                       });                   
        res.status(200).send('Usuario registrado exitosamente')
     },
-
-
-    addData : function( req, res) {
-        var nombre = req.body.name;
-        var apellido = req.body.lastname;
-        var cedula = req.body.id;
-        var cargo = req.body.position;
-        var usuario = req.body.user;
-        var contrasena = req.body.password;
-
-        data.push({'name': nombre,
-                   'lastname': apellido,
-                   'id': cedula,
-                   'position': cargo,
-                   'user': usuario,
-                   'password': contrasena
-                });
-        res.send(data);
-    },
-
     getUsers_,
     getUserById_,
+    updateUser_,
 
 
 };
