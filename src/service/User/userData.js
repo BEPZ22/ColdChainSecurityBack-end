@@ -34,7 +34,7 @@ const getUserById_ = async (req, res) => {
   // })
 
   try {
-    const response = await pool.query(_getUserByID, [id]);
+    const response = await pool.query(_getUserByID, [req.body.cedula]);
     res.status(200).send(response.rows);
   } catch (error) {
     res.status(404).send(error);
