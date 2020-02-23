@@ -9,7 +9,7 @@ const pool = new Pool({
 });
 //$3integer
 const _createUser = "SELECT create_user($1 , $2 , $3 , $4 , $5 , $6);";
-const _getUserByID = "";
+const _getUserByID = "SELECT * FROM users WHERE usu_cedula = $1";
 // const _getAllUsers = "";
 const _updateUser = "SELECT update_user($1 , $2 , $3 , $4 , $5 , $6);";
 const _deleteUser = "";
@@ -21,7 +21,24 @@ const getUsers_ = async(req, res) => {
   } catch (error) {
     res.status(404).send(error);
   }
+}
 
+const getUserById_ = (req, res) => {
+  const id = parseInt(req.body.cedula)
+
+  // pool.query(_getUserByID, [id], (error, results) => {
+  //   if (error) {
+  //     throw error
+  //   }
+  //   response.status(200).json(results.rows)
+  // })
+
+  try {
+    const response = await pool.query(_getUserByID, [id]);
+    res.status(200).send(response.rows);
+  } catch (error) {
+    res.status(404).send(error);
+  }
 }
 
 module.exports = {
@@ -96,6 +113,7 @@ module.exports = {
     },
 
     getUsers_,
+    getUserById_,
 
 
 };
