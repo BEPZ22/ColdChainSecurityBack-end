@@ -9,7 +9,7 @@ const pool = new Pool({
 });
 //$3integer
 const _createUser = "SELECT create_user($1 , $2 , $3 , $4 , $5 , $6);";
-const _getUserByID = "SELECT * FROM users WHERE usu_cedula = $1";
+const _getUserByID = "SELECT * FROM usuario WHERE usu_cedula = $1";
 // const _getAllUsers = "";
 const _updateUser = "SELECT update_user($1 , $2 , $3 , $4 , $5 , $6);";
 const _deleteUser = "";
@@ -24,7 +24,7 @@ const getUsers_ = async(req, res) => {
 }
 
 const getUserById_ = async (req, res) => {
-  const id = parseInt(req.body.cedula)
+  const { cedula } = req.body
 
   // pool.query(_getUserByID, [id], (error, results) => {
   //   if (error) {
@@ -34,7 +34,7 @@ const getUserById_ = async (req, res) => {
   // })
 
   try {
-    const response = await pool.query(_getUserByID, [req.body.cedula]);
+    const response = await pool.query(_getUserByID, [cedula]);
     res.status(200).send(response.rows);
   } catch (error) {
     res.status(404).send(error);
