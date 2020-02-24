@@ -42,7 +42,17 @@ const updateUser_ = async (req, res) => {
                                                      cargo,
                                                      username,
                                                      password]);
-    res.status(200).send('Usuario actualizado exitosamente');
+    res.status(200).send(response.rows);
+  } catch (error) {
+    res.status(404).send(error);
+  }
+}
+
+const deleteUser_ = async (req,res) => {
+  const { cedula } = req.body
+  try {
+    const response = await pool.query(_deleteUser, [cedula]);
+    res.status(200).send('Usuario eliminado exitosamente');
   } catch (error) {
     res.status(404).send(error);
   }
@@ -102,6 +112,7 @@ module.exports = {
     getUsers_,
     getUserById_,
     updateUser_,
+    deleteUser_
 
 
 };

@@ -11,5 +11,6 @@ module.exports = {
         app.post('/usuario', user.createUser);
         app.get('/usuarioID', user.getUserById_);
         app.put('/usuario', user.updateUser_);
+        app.delete('/usuario', user.deleteUser_ );
     }
 }
