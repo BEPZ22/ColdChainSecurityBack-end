@@ -7,10 +7,10 @@ const pool = new Pool({
   password: process.env.DATABASE_PASSWORD,
   port: process.env.DATABASE_PORT,
 });
-//$3integer
+
 const _createUser = "SELECT create_user( $1 , $2 , $3 , $4 , $5 , $6 );";
 const _getUserByID = "SELECT * FROM usuario WHERE usu_cedula = $1";
-// const _getAllUsers = "";
+const _getAllUsers = "SELECT * FROM usuario;";
 const _updateUser = "SELECT update_user( $1 , $2 , $3 , $4 , $5 , $6 );";
 const _deleteUser = "SELECT delete_user( $1 );";
 
@@ -52,7 +52,7 @@ const deleteUser_ = async (req,res) => {
   const { cedula } = req.body
   try {
     const response = await pool.query(_deleteUser, [cedula]);
-    res.status(200).send('Usuario eliminado exitosamente');
+    res.status(200).send({'message':'Usuario eliminado exitosamente'});
   } catch (error) {
     res.status(404).send(error);
   }
@@ -60,59 +60,80 @@ const deleteUser_ = async (req,res) => {
 
 module.exports = {
 
-    getData : function(req, res){
-        res.send("hola jejeje");
-    },
+    getAllUsers : async function(req, res) {
 
-    getAllUsers : function(req, res){
-      // pool.query(_getAllUsers,(error, results) => {
-      //   if (error) {
-      //     throw error
-      //   }
-      //   res.status(200).send(results.rows)
-      // })
-      // res.send("hola jejeje");
-      // pool.query(_getAllUsers)
-      //   .then(response => {
-      //       res.status(200).send(response.rows);
-      //       pool.end()
-      //   })
-      //   .catch(err => {
-      //     res.status(404).send('No se encontro informacion')
-      //     pool.end()
-      //   })
-      
+      const { cedula } = req.body
+
+      try {
+        const response = await pool.query(_getAllUsers);
+        res.status(200).send(response.rows);
+      } catch (error) {
+        res.status(404).send(error);
+      }
+
     },
 
     getUserByID : function(req, res){
-      res.send("hola jejeje");
+
+      const { cedula } = req.body
+
+      try {
+        const response = await pool.query(_getUserByID, [cedula]);
+        res.status(200).send(response.rows);
+      } catch (error) {
+        res.status(404).send(error);
+      }
+
     },
 
-    createUser : function (req, res){
+    createUser : async function (req, res){
 
         const { nombre, apellido, cedula, cargo, username, password } = req.body
+        try{
+          const response = await pool.query( _createUser , [ nombre, 
+                                                       apellido, 
+                                                       cedula, 
+                                                       cargo, 
+                                                       username, 
+                                                       password]);                   
+          res.status(200).send({'message':'Usuario creado exitosamente'});
+        } catch(error){
+          res.status(404).send(error);
+        }
 
-        pool.query( _createUser , 
-                    [
-                        nombre, 
-                        apellido, 
-                        cedula, 
-                        cargo, 
-                        username, 
-                        password
-                    ],
-                      (error, results) => {
-                        if (error) {
-                          throw error
-                        }
-                        // res.status(201).send(`User added with ID: ${result.insertId}`)
-                      });                   
-       res.status(200).send('Usuario registrado exitosamente')
     },
-    getUsers_,
-    getUserById_,
-    updateUser_,
-    deleteUser_
+
+    updateUser : async function(req, res){
+      const { nombre, apellido, cedula, cargo, username, password } = req.body
+      try {
+        const response = await pool.query(_updateUser, [ nombre,
+                                                         apellido,
+                                                         cedula,
+                                                         cargo,
+                                                         username,
+                                                         password]);
+        res.status(200).send(response.rows);
+      } catch (error) {
+        res.status(404).send(error);
+      }
+    },
+
+    deleteUser : async function(req, res){
+
+      const { cedula } = req.body
+
+      try {
+        const response = await pool.query(_deleteUser, [cedula]);
+        res.status(200).send({'message':'Usuario eliminado exitosamente'});
+      } catch (error) {
+        res.status(404).send(error);
+      }
+
+    },
+    // getUsers_,
+    // getUserById_,
+    // updateUser_,
+    // deleteUser_
 
 
 };
