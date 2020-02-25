@@ -73,7 +73,7 @@ module.exports = {
 
     },
 
-    getUserByID : function(req, res){
+    getUserByID : async function(req, res){
 
       const { cedula } = req.body
 
