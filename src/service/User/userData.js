@@ -62,8 +62,6 @@ module.exports = {
 
     getAllUsers : async function(req, res) {
 
-      const { cedula } = req.body
-
       try {
         const response = await pool.query(_getAllUsers);
         res.status(200).send(response.rows);
