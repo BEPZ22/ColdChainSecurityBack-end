@@ -1,6 +1,7 @@
 const arduino = require("./Arduino/arduinoData");
 const user = require("./User/userData");
 const truck = require("./Truck/truckData");
+const warehouse = require("./Warehouse/warehouseData");
 
 module.exports = {
     
@@ -20,6 +21,12 @@ module.exports = {
         app.post('/unidad', truck.createTruck);
         app.put('/unidad', truck.updateTruck);
         app.delete('/unidad', truck.deleteTruck);
+
+        app.get('/almacen', warehouse.getAllWarehouse);
+        app.get('/almacenNombre', warehouse.getWarehouseByWarehouseName);
+        app.post('/almacen', warehouse.createWarehouse);
+        app.put('/almacen', warehouse.updateWarehouse); //funcionamiento dudoso
+        app.delete('/almacen', warehouse.deleteWarehouse);
 
     }
 }
