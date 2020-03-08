@@ -61,7 +61,7 @@ module.exports = {
   
       updateWarehouse : async function(req, res){
         
-        const { nombre, avenida, calle, zona, edificio, apartamento, nro_apartameto, casa, nro_casa, lugar } = req.body
+        const { nombre, avenida, calle, zona, edificio, apartamento, nro_apartameto, casa, nro_casa, lugar, nombreNuevo } = req.body
         try {
           const response = await pool.query( _updateWarehouse, [ nombre, 
                                                             avenida, 
@@ -72,7 +72,8 @@ module.exports = {
                                                             nro_apartameto, 
                                                             casa, 
                                                             nro_casa, 
-                                                            lugar]);
+                                                            lugar,
+                                                            nombreNuevo]);
           res.status(200).send(response.rows);
         } catch (error) {
           res.status(404).send(error);
