@@ -1,9 +1,10 @@
 const arduino = require("./Arduino/arduinoData");
 const user = require("./User/userData");
+const app = require("../../server");
 
 module.exports = {
     
-    assignRoutes : function(app){
+    assignRoutes : function(){
         
         app.get('/arduino', arduino.getData);
         app.post('/arduino', arduino.addData);

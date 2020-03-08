@@ -8,7 +8,7 @@ app.use(bodyParser.json());
 
 //routesArduino.assignRoutes(app);
 //routesMapa.assignRoutes(app);
-routes.assignRoutes(app);
+
 
 app.listen(PORT, () => {
   console.log(`El servidor está inicializado en el puerto ${ PORT }`);
@@ -25,5 +25,7 @@ app.use((req, res, next) => {
       next();
   }
 });
+
+//routes.assignRoutes(app);
 
 module.exports = app;
