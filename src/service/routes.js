@@ -2,6 +2,7 @@ const arduino = require("./Arduino/arduinoData");
 const user = require("./User/userData");
 const truck = require("./Truck/truckData");
 const warehouse = require("./Warehouse/warehouseData");
+const place = require("./Place/placeData");
 
 module.exports = {
     
@@ -27,6 +28,9 @@ module.exports = {
         app.post('/almacen', warehouse.createWarehouse);
         app.put('/almacen', warehouse.updateWarehouse); //funcionamiento dudoso
         app.delete('/almacen', warehouse.deleteWarehouse);
+
+        app.get('/pais', place.getAllCountries);
+        app.get('/estado', place.getAllStatesByCountries);
 
     }
 }
