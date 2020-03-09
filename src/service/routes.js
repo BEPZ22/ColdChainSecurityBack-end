@@ -25,9 +25,11 @@ module.exports = {
 
         app.get('/almacen', warehouse.getAllWarehouse);
         app.get('/almacenNombre', warehouse.getWarehouseByWarehouseName);
+        app.get('/almacenes', warehouse.getWarehouseName);
         app.post('/almacen', warehouse.createWarehouse);
         app.put('/almacen', warehouse.updateWarehouse); //funcionamiento dudoso
         app.delete('/almacen', warehouse.deleteWarehouse);
+        
 
         app.get('/pais', place.getAllCountries);
         app.get('/estado', place.getAllStatesByCountries);
