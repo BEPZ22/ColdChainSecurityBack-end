@@ -21,7 +21,7 @@ module.exports = {
         const response = await pool.query(_getAllUsers);
         res.status(200).send(response.rows);
       } catch (error) {
-        res.status(404).send(error);
+        res.status(404).send({'message' : error});
       }
 
     },
@@ -34,7 +34,7 @@ module.exports = {
         const response = await pool.query(_getUserByID, [cedula]);
         res.status(200).send(response.rows);
       } catch (error) {
-        res.status(404).send(error);
+        res.status(404).send({'message' : error});
       }
 
     },
@@ -51,7 +51,7 @@ module.exports = {
                                                        password]);                   
           res.status(200).send({'message':'Usuario creado exitosamente'});
         } catch(error){
-          res.status(404).send(error);
+          res.status(404).send({'message' : error});
         }
 
     },
@@ -67,7 +67,7 @@ module.exports = {
                                                          password]);
         res.status(200).send(response.rows);
       } catch (error) {
-        res.status(404).send(error);
+        res.status(404).send({'message' : error});
       }
     },
 
@@ -79,7 +79,7 @@ module.exports = {
         const response = await pool.query(_deleteUser, [cedula]);
         res.status(200).send({'message':'Usuario eliminado exitosamente'});
       } catch (error) {
-        res.status(404).send(error);
+        res.status(404).send({'message' : error});
       }
 
     }
