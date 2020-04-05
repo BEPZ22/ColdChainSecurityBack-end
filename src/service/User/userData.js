@@ -28,7 +28,7 @@ module.exports = {
 
     getUserByID : async function(req, res){
 
-      const { cedula } = req.params['id']
+      const cedula = req.params['id']
 
       try {
         const response = await pool.query(_getUserByID, [cedula]);
