@@ -13,7 +13,8 @@ app.listen(PORT, () => {
  
 app.use(cors());
 // app.use((req, res, next) => {
-//   res.header("Access-Control-Allow-Origin", '*');
+//   // En dado caso para usar esta parte del codigo el Access-Control-Allow-Origin tiene que tener su host
+//   res.header("Access-Control-Allow-Origin", 'https://coldchainsecurity.herokuapp.com/');
 //   res.header("Access-Control-Allow-Credentials", true);
 //   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
 //   res.header("Access-Control-Allow-Headers", "Authorization, Origin,X-Requested-With,Content-Type,Accept,content-type,application/json");
