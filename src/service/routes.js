@@ -18,13 +18,13 @@ module.exports = {
         app.delete('/usuario', user.deleteUser);
 
         app.get('/unidad', truck.getAllTrucks);
-        app.get('/unidadPlaca', truck.getTruckByPlate);
+        app.get('/unidad/:placa', truck.getTruckByPlate);
         app.post('/unidad', truck.createTruck);
         app.put('/unidad', truck.updateTruck);
         app.delete('/unidad', truck.deleteTruck);
 
         app.get('/almacen', warehouse.getAllWarehouse);
-        app.get('/almacenNombre', warehouse.getWarehouseByWarehouseName);
+        app.get('/almacen/:nombre', warehouse.getWarehouseByWarehouseName);
         app.get('/almacenes', warehouse.getWarehouseName);
         app.post('/almacen', warehouse.createWarehouse);
         app.put('/almacen', warehouse.updateWarehouse); //funcionamiento dudoso
@@ -32,7 +32,7 @@ module.exports = {
         
 
         app.get('/pais', place.getAllCountries);
-        app.get('/estado', place.getAllStatesByCountries);
+        app.get('/estado/:pais', place.getAllStatesByCountries);
 
     }
 }

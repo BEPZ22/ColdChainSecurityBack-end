@@ -27,8 +27,7 @@ module.exports = {
       },
   
       getTruckByPlate : async function(req, res){
-  
-        const { placa } = req.body
+        const placa = req.params['placa']
         try {
           const response = await pool.query(_getTruckByPlate, [placa]);
           res.status(200).send(response.rows);

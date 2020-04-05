@@ -27,9 +27,7 @@ module.exports = {
     },
 
     getUserByID : async function(req, res){
-
       const cedula = req.params['id']
-
       try {
         const response = await pool.query(_getUserByID, [cedula]);
         res.status(200).send(response.rows);
@@ -40,7 +38,6 @@ module.exports = {
     },
 
     createUser : async function (req, res){
-
         const { nombre, apellido, cedula, cargo, username, password } = req.body
         try{
           const response = await pool.query( _createUser , [ nombre, 
@@ -72,9 +69,7 @@ module.exports = {
     },
 
     deleteUser : async function(req, res){
-
       const { cedula } = req.body
-
       try {
         const response = await pool.query(_deleteUser, [cedula]);
         res.status(200).send({'message':'Usuario eliminado exitosamente'});

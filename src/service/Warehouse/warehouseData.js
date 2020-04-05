@@ -28,8 +28,7 @@ module.exports = {
       },
   
       getWarehouseByWarehouseName : async function(req, res){
-  
-        const { nombre } = req.body
+        const nombre=  req.params['nombre']
         try {
           const response = await pool.query(_getWarehouseByWarehouse, [nombre]);
           res.status(200).send(response.rows);

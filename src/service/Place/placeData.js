@@ -23,7 +23,7 @@ module.exports = {
       },
 
     getAllStatesByCountries : async function(req, res) {
-        const { pais } = req.body
+        const pais =  req.params['pais']
         try {
           const response = await pool.query(_getAllStates, [pais]);
           res.status(200).send(response.rows);
