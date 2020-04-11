@@ -56,9 +56,7 @@ module.exports = {
                                                             cedula, 
                                                             cargo, 
                                                             username, 
-                                                            hashPassword,
-                                                            moment(new Date()),
-                                                            moment(new Date())]);         
+                                                            hashPassword]);         
           res.status(201).send({'message':'Usuario creado exitosamente'});
         } catch(error){
           if (error.routine === '_bt_check_unique') {
