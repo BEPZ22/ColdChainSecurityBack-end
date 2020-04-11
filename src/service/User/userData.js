@@ -44,7 +44,7 @@ module.exports = {
           return res.status(400).send({'message': 'Introduzca Username y/o Contraseña'});
         }
 
-        // if (!Helper.isValidEmail(req.body.email)) {
+        // if (!helper.isValidEmail(req.body.email)) {
         //   return res.status(400).send({ 'message': '' });
         // }
 
