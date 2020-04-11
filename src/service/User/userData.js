@@ -48,7 +48,7 @@ module.exports = {
         //   return res.status(400).send({ 'message': '' });
         // }
 
-        const hashPassword = Helper.hashPassword(req.body.password);
+        const hashPassword = helper.hashPassword(req.body.password);
         const { nombre, apellido, cedula, cargo, username} = req.body
         try{
           const response = await pool.query( _createUser , [ nombre, 
