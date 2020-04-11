@@ -30,7 +30,6 @@ module.exports = {
         app.put('/almacen', warehouse.updateWarehouse); //funcionamiento dudoso
         app.delete('/almacen', warehouse.deleteWarehouse);
         
-
         app.get('/pais', place.getAllCountries);
         app.get('/estado/:pais', place.getAllStatesByCountries);
 

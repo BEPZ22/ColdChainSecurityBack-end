@@ -39,7 +39,7 @@ module.exports = {
   
       createTruck : async function (req, res){
   
-          const { conductor, marca, modelo, placa, ano, capacidad,ruta,nombreAlmacen } = req.body
+          const { conductor, marca, modelo, placa, ano, capacidad, ruta, nombreAlmacen } = req.body
           try{
             const response = await pool.query( _createTruck , [ conductor, 
                                                                marca, 
