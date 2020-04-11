@@ -51,15 +51,14 @@ module.exports = {
         const hashPassword = helper.hashPassword(req.body.password);
         const { nombre, apellido, cedula, cargo, username} = req.body
         try{
-          const date = new Date();
           const response = await pool.query( _createUser , [ nombre, 
                                                             apellido, 
                                                             cedula, 
                                                             cargo, 
                                                             username, 
                                                             hashPassword,
-                                                            date.getTime(),
-                                                            date.getTime()]);         
+                                                            moment(new Date().getTime()).format("X"),
+                                                            moment(new Date().getTime()).format("X")]);         
           res.status(201).send({'message':'Usuario creado exitosamente'});
         } catch(error){
           if (error.routine === '_bt_check_unique') {
