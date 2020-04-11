@@ -59,7 +59,7 @@ module.exports = {
                                                             username, 
                                                             hashPassword,
                                                             date.getTime(),
-                                                            new Date().getTime()]);         
+                                                            date.getTime()]);         
           res.status(201).send({'message':'Usuario creado exitosamente'});
         } catch(error){
           if (error.routine === '_bt_check_unique') {
