@@ -25,7 +25,7 @@ module.exports = {
           
           const decoded = await jwt.verify(token, process.env.SECRET);
           const response = await db.query(_getUserByID, [decoded.userId]);
-          
+          console.log(response.rows[0])
           if(!response.rows[0]) {
             res.status(400).send({ 'message': 'Token invalido' });
           }
