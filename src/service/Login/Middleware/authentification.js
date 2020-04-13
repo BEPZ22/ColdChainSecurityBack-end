@@ -15,9 +15,10 @@ module.exports = {
 
     verifyToken :  async function(req, res, next){
         
-        const token = req.headers['x-access-token'];
-        
+        const token = req.headers['x-access-token'].split(" ")[1];
+        console.log(token, "\n")
         const tokenized = token.split(" ")[1];
+        console.log(tokenized)
         if(!token) {
           res.status(400).send({ 'message': 'Se necesita un Token para proseguir' });
         }
