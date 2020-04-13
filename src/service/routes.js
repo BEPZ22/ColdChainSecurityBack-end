@@ -3,6 +3,8 @@ const user = require("./User/userData");
 const truck = require("./Truck/truckData");
 const warehouse = require("./Warehouse/warehouseData");
 const place = require("./Place/placeData");
+const login = require("./Login/Controller/login");
+const auth = require("../service/Login/Middleware/authentification")
 
 module.exports = {
     
@@ -11,7 +13,7 @@ module.exports = {
         app.get('/arduino', arduino.getData);
         app.post('/arduino', arduino.addData);
 
-        app.get('/usuario', user.getAllUsers);
+        app.get('/usuario',auth.verifyToken,user.getAllUsers);
         app.get('/usuario/:id', user.getUserByID);
         app.post('/usuario', user.createUser);
         app.put('/usuario', user.updateUser);
@@ -33,5 +35,6 @@ module.exports = {
         app.get('/pais', place.getAllCountries);
         app.get('/estado/:pais', place.getAllStatesByCountries);
 
+        app.post('/login', login.login());
     }
 }

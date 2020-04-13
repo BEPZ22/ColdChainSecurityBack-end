@@ -1,0 +1,45 @@
+const helper =  require("./helper");
+const Pool = require('pg').Pool;
+
+const pool = new Pool({
+  user: process.env.DATABASE_USER,
+  host: process.env.DATABASE_HOST,
+  database: process.env.DATABASE_NAME,
+  password: process.env.DATABASE_PASSWORD,
+  port: process.env.DATABASE_PORT,
+});
+
+const _getUserByUsername = "SELECT * FROM usuario where usu_usuario = $1;"
+
+module.exports = {
+
+    login : async function(req, res){
+        if (!req.body.username || !req.body.password) {
+            return res.status(400).send({'message': 'No introdujo su nombre de usuario o contraseña'});
+        }
+
+        try {
+            const response = await pool.query(_getUserByUsername, [req.body.username])
+            if (!response.rows[0]) {
+                res.status(400).send({'message': 'Las credenciales introducidas son incorrectas'});
+            }
+
+            if(!helper.comparePassword(response.rows[0].usu_contrasena, req.body.password)) {
+                res.status(400).send({ 'message': 'Su contraseña introducida es incorrecta' });
+            }
+
+            const token = helper.generateToken(response.rows[0].usu_id);
+            res.status(200).send({ token , 'cargo' : response.rows[0].usu_contrasena });
+
+        } catch (error) {
+            res.status(404).send({'message' : error});
+        }
+
+
+    },
+
+    logout: async function(req, res){
+
+    }
+
+}

@@ -13,6 +13,7 @@ const pool = new Pool({
 const _createUser = "SELECT create_user( $1 , $2 , $3 , $4 , $5 , $6 );";
 const _getUserByID = "SELECT * FROM usuario WHERE usu_cedula = $1";
 const _getAllUsers = "SELECT * FROM usuario;";
+const _getUserByUsername = "SELECT * FROM usuario where usu_usuario = $1;"
 const _updateUser = "SELECT update_user( $1 , $2 , $3 , $4 , $5 , $6 );";
 const _deleteUser = "SELECT delete_user( $1 );";
 
@@ -40,16 +41,19 @@ module.exports = {
     },
 
     createUser : async function (req, res){
+      const hashPassword = helper.hashPassword(req.body.password);
+      const { nombre, apellido, cedula, cargo, username} = req.body
+      
+      const validacion = await pool.query(_getUserByUsername, [username]);
+
         if (!req.body.username || !req.body.password) {
-          return res.status(400).send({'message': 'Introduzca Username y/o Contraseña'});
+          res.status(400).send({'message': 'Introduzca Username y/o Contraseña'});
         }
 
-        // if (!helper.isValidEmail(req.body.email)) {
-        //   return res.status(400).send({ 'message': '' });
-        // }
-
-        const hashPassword = helper.hashPassword(req.body.password);
-        const { nombre, apellido, cedula, cargo, username} = req.body
+        if (!validacion) {
+          res.status(400).send({'message': 'El usuario ya existe'});
+        }
+        
         try{
           const response = await pool.query( _createUser , [ nombre, 
                                                             apellido, 
@@ -59,9 +63,6 @@ module.exports = {
                                                             hashPassword]);         
           res.status(201).send({'message':'Usuario creado exitosamente'});
         } catch(error){
-          if (error.routine === '_bt_check_unique') {
-            return res.status(400).send({ 'message': 'El usuario ya existe (username)' })
-          }
           res.status(404).send({'message' : error});
         }
 
