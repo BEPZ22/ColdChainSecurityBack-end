@@ -35,6 +35,6 @@ module.exports = {
         app.get('/pais', place.getAllCountries);
         app.get('/estado/:pais', place.getAllStatesByCountries);
 
-        app.post('/login', login.login());
+        app.post('/login', login.login);
     }
 }

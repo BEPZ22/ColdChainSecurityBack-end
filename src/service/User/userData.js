@@ -22,7 +22,7 @@ module.exports = {
     getAllUsers : async function(req, res) {
       try {
         const response = await pool.query(_getAllUsers);
-        res.status(200).send(response.rows[0]);
+        res.status(200).send(response.rows);
       } catch (error) {
         res.status(404).send({'message' : error});
       }
