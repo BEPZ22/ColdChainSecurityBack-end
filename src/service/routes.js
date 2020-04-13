@@ -13,7 +13,7 @@ module.exports = {
         app.get('/arduino', arduino.getData);
         app.post('/arduino', arduino.addData);
 
-        app.get('/usuario',auth.verifyToken,user.getAllUsers);
+        app.get('/usuario', auth.verifyToken, user.getAllUsers);
         app.get('/usuario/:id', user.getUserByID);
         app.post('/usuario', user.createUser);
         app.put('/usuario', user.updateUser);
