@@ -29,7 +29,7 @@ module.exports = {
             }
 
             const token = helper.generateToken(response.rows[0].usu_id);
-            res.status(200).send({ token , 'cargo' : response.rows[0].usu_contrasena });
+            res.status(200).send({ token , 'cargo' : response.rows[0].usu_cargo });
 
         } catch (error) {
             res.status(404).send({'message' : error});
