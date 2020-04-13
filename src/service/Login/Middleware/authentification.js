@@ -17,13 +17,14 @@ module.exports = {
         
         const token = req.headers['x-access-token'];
         
+        const tokenized = token.split(" ")[1];
         if(!token) {
           res.status(400).send({ 'message': 'Se necesita un Token para proseguir' });
         }
         
         try {
           
-          const decoded = await jwt.verify(token, process.env.SECRET);
+          const decoded = await jwt.verify(tokenized, process.env.SECRET);
           const response = await db.query(_getUserByID, [decoded.userId]);
           
           if(!response.rows[0]) {
