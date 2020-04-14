@@ -16,17 +16,14 @@ module.exports = {
     verifyToken :  async function(req, res, next){
         
         const token = req.headers['x-access-token']
-        console.log(token, "\n")
+
         if(!token) {
           res.status(400).send({ 'message': 'Se necesita un Token para proseguir' });
         }
         
         try {
-          
           const decoded = await jwt.verify(token, process.env.SECRET);
-          console.log("decoded: ",decoded.userId ,"\n", "Secret: ", process.env.SECRET)
           const response = await pool.query(_getUserByID, [decoded.userId]);
-          console.log("\nBD: ",response.rows[0])
           if(!response.rows[0]) {
             res.status(400).send({ 'message': 'Token invalido' });
           }
