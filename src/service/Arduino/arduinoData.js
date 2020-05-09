@@ -12,7 +12,13 @@ module.exports = {
     },
 
     addData : function( req, res) {
-        const { Lg, Lt, Tp, Dt, Un, Wh } = req.query
+        const Lg = req.query.Lg
+        const Lt = req.query.Lt
+        const Tp = req.query.Tp
+        const Dt = req.query.Dt
+        const Un = req.query.Un
+        const Wh = req.query.Wh
+        // const { Lg, Lt, Tp, Dt, Un, Wh } = req.query
         try {
             data.push({
                 'Lg': Lg,
