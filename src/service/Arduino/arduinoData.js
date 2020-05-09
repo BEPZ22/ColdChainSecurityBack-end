@@ -18,8 +18,7 @@ module.exports = {
         const Dt = req.params['Dt']
         const Un = req.params['Un']
         const Wh = req.params['Wh']
-        // ?Lg=10&Lt=10&Tp=10&Dt=5/9/2020 3:22&Un=XLSE234R&Wh=ColdChainSecurity1
-        // const { Lg, Lt, Tp, Dt, Un, Wh } = req.query
+
         try {
             data.push({
                 'Lg': Lg,
@@ -37,12 +36,12 @@ module.exports = {
     },
 
     addData2 : function( req, res) {
-        const Lg = req.params.Lg
-        const Lt = req.params.Lt
-        const Tp = req.params.Tp
-        const Dt = req.params.Dt
-        const Un = req.params.Un
-        const Wh = req.params.Wh
+        const Lg = req.query.Lg
+        const Lt = req.query.Lt
+        const Tp = req.query.Tp
+        const Dt = req.query.Dt
+        const Un = req.query.Un
+        const Wh = req.query.Wh
         try {
             data.push({
                 'Lg': Lg,
