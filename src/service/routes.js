@@ -9,10 +9,10 @@ const auth = require("../service/Login/Middleware/authentification")
 module.exports = {
     
     assignRoutes : function(app){
-        
+        // 'path/data?:id?:name'Lg, Lt, Tp, Dt, Un, Wh
         app.get('/arduino', arduino.getData);
-        app.post('/arduino', arduino.addData);
-
+        app.get('/arduino/addData/:Lg?:Lt:?:Tp?:Dt?:Un?:Wh', arduino.addData);
+        
         app.get('/usuario', auth.verifyToken, user.getAllUsers);
         app.get('/usuario/:id', auth.verifyToken, user.getUserByID);
         app.post('/usuario', auth.verifyToken, user.createUser);
