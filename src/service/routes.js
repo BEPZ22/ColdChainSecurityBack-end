@@ -11,7 +11,7 @@ module.exports = {
     assignRoutes : function(app){
         
         app.get('/arduino', arduino.getData);
-        app.get('/arduino/addData/:Lg/:Lt/:Tp/:Dt/:Un/:Wh', arduino.addData);
+        app.get('/arduino/addData/:Id/:Lg/:Lt/:Tp/:Dt/:Un/:Wh/:Co/:Ua', arduino.addData);
         app.get('/arduino/addData2', arduino.addData2)
         
         app.get('/usuario', auth.verifyToken, user.getAllUsers);
