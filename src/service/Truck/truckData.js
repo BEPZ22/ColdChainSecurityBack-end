@@ -60,7 +60,7 @@ module.exports = {
   
       updateTruck : async function(req, res){
         
-        const { conductor, marca, modelo, placa, ano, capacidad,ruta} = req.body
+        const { conductor, marca, modelo, placa, ano, capacidad,ruta,placaNueva} = req.body
         try {
           const response = await pool.query(_updateTruck, [ conductor, 
                                                             marca, 
@@ -68,7 +68,8 @@ module.exports = {
                                                             placa, 
                                                             ano, 
                                                             capacidad,
-                                                            ruta]);
+                                                            ruta,
+                                                            placaNueva]);
           res.status(200).send(response.rows);
         } catch (error) {
           res.status(404).send(error);
