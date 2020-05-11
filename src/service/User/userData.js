@@ -95,7 +95,7 @@ module.exports = {
       const { cedula } = req.body
       try {
         const response = await pool.query(_deleteUser, [cedula]);
-        res.status(204).send({'message':'Usuario eliminado exitosamente'});
+        res.status(200).send({'message':'Usuario eliminado exitosamente'});
       } catch (error) {
         res.status(404).send({'message' : error});
       }
