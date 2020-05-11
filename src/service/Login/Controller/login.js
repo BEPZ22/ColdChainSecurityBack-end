@@ -9,7 +9,8 @@ const pool = new Pool({
   port: process.env.DATABASE_PORT,
 });
 
-const _getUserByUsername = "SELECT * FROM usuario where usu_usuario = $1;"
+const _getUserByUsername = "SELECT * FROM usuario where usu_usuario = $1;";
+const _getRolByName = "SELECT * FROM rol where rol_id = $1;"
 
 module.exports = {
 
@@ -27,9 +28,13 @@ module.exports = {
             if(!helper.comparePassword(response.rows[0].usu_contrasena, req.body.password)) {
                 res.status(400).send({ 'message': 'Su contraseña introducida es incorrecta' });
             }
-
+            
+            const rol = await pool.query(_getRolByName,[response.rows[0].usu_rol_fk])
             const token = helper.generateToken(response.rows[0].usu_id);
-            res.status(200).send({ token , 'cargo' : response.rows[0].usu_cargo });
+            res.status(200).send({  token , 
+                                    'rol' : rol.rows[0].rol_tipo , 
+                                    'id_comercio': response.rows[0].usu_compania_fk
+                                });
 
         } catch (error) {
             res.status(404).send({'message' : error});
