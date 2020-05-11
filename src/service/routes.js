@@ -15,7 +15,7 @@ module.exports = {
         app.get('/arduino/addData2', arduino.addData2)
         
         app.get('/usuario/:rol/:comercio', /*auth.verifyToken,*/ user.getAllUsers);
-        app.get('/usuario/:id/:rol', /*auth.verifyToken,*/ user.getUserByID);
+        app.get('/usuario/cedula/:id/:rol', /*auth.verifyToken,*/ user.getUserByID);
         app.post('/usuario', /*auth.verifyToken,*/ user.createUser);
         app.put('/usuario', /*auth.verifyToken,*/ user.updateUser);
         app.delete('/usuario', /*auth.verifyToken,*/ user.deleteUser);

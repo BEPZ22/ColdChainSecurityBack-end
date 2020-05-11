@@ -23,7 +23,7 @@ module.exports = {
       const rol = req.params['rol'];
       const id_comercio = req.params['comercio'];
       try {
-        const response = await pool.query(_getAllUsers, []);
+        const response = await pool.query(_getAllUsers, [rol,id_comercio]);
         return res.status(200).send(response.rows);
       } catch (error) {
         res.status(404).send({'message' : error});
