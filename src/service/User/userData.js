@@ -11,8 +11,8 @@ const pool = new Pool({
 });
 
 const _createUser = "SELECT create_user( $1 , $2 , $3 , $4 , $5 , $6 ,$7, $8 );";
-const _getUserByID = "SELECT get_user_by_id($1 , $2);";
-const _getAllUsers = "SELECT get_all_user($1 , $2);";
+const _getUserByID = "SELECT (g).* FROM (SELECT get_user_by_id($1 , $2) AS g) as func;";
+const _getAllUsers = "SELECT (g).* FROM (SELECT get_all_user($1 , $2) AS g) as func;";
 const _getUserByUsername = "SELECT * FROM usuario where usu_usuario = $1;"
 const _updateUser = "SELECT update_user( $1 , $2 , $3 , $4 , $5 , $6 ,$7, $8);";
 const _deleteUser = "SELECT delete_user( $1 );";
