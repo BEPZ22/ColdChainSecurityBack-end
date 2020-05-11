@@ -14,11 +14,11 @@ module.exports = {
         app.get('/arduino/addData/:Id/:Lg/:Lt/:Tp/:Dt/:Un/:Wh/:Co/:Ua', arduino.addData);
         app.get('/arduino/addData2', arduino.addData2)
         
-        app.get('/usuario/:rol/:comercio', auth.verifyToken, user.getAllUsers);
-        app.get('/usuario/:id/:rol', auth.verifyToken, user.getUserByID);
-        app.post('/usuario', auth.verifyToken, user.createUser);
-        app.put('/usuario', auth.verifyToken, user.updateUser);
-        app.delete('/usuario', auth.verifyToken, user.deleteUser);
+        app.get('/usuario/:rol/:comercio', /*auth.verifyToken,*/ user.getAllUsers);
+        app.get('/usuario/:id/:rol', /*auth.verifyToken,*/ user.getUserByID);
+        app.post('/usuario', /*auth.verifyToken,*/ user.createUser);
+        app.put('/usuario', /*auth.verifyToken,*/ user.updateUser);
+        app.delete('/usuario', /*auth.verifyToken,*/ user.deleteUser);
 
         app.get('/unidad', auth.verifyToken, truck.getAllTrucks);
         app.get('/unidad/:placa', auth.verifyToken, truck.getTruckByPlate);
