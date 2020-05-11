@@ -11,7 +11,7 @@ const pool = new Pool({
 const _createTruck = "SELECT create_truck( $1 , $2 , $3 , $4 , $5 , $6, $7, $8 );";
 const _getTruckByPlate = "SELECT * FROM get_unidad_informacion_by_placa( $1 );";
 const _getAllTrucks = "SELECT * FROM get_unidad_informacion($1 , $2);";
-const _updateTruck = "SELECT update_truck( $1 , $2 , $3 , $4 , $5 , $6, $7);";
+const _updateTruck = "SELECT update_truck( $1 , $2 , $3 , $4 , $5 , $6, $7, $8);";
 const _deleteTruck = "SELECT delete_truck( $1 );";
 
 module.exports = {
@@ -60,7 +60,7 @@ module.exports = {
   
       updateTruck : async function(req, res){
         
-        const { conductor, marca, modelo, placa, ano, capacidad,ruta,placaNueva} = req.body
+        const { conductor, marca, modelo, placa, ano, capacidad,ruta, placaNueva} = req.body
         try {
           const response = await pool.query(_updateTruck, [ conductor, 
                                                             marca, 
