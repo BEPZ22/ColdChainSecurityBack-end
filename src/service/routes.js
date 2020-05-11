@@ -37,7 +37,7 @@ module.exports = {
         app.get('/pais', auth.verifyToken, place.getAllCountries);
         app.get('/estado/:pais', auth.verifyToken, place.getAllStatesByCountries);
 
-        app.get('/rol', auth.verifyToken, otro.getAllRol);
+        app.get('/rol/:rol', auth.verifyToken, otro.getAllRol);
         app.get('/horarioE', auth.verifyToken, otro.getAllEmployeeSchedule);
         app.get('/horarioC', auth.verifyToken, otro.getAllCommerceSchedule);
 
