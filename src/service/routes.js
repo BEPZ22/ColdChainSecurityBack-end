@@ -12,7 +12,7 @@ module.exports = {
         
         app.get('/arduino', arduino.getData);
         app.get('/arduino/addData/:Id/:Lg/:Lt/:Tp/:Dt/:Un/:Wh/:Co/:Ua', arduino.addData);
-        app.get('/arduino/addData2', arduino.addData2)
+        app.get('/arduino/addData2', arduino.addData2);
         
         app.get('/usuario/:rol/:comercio', auth.verifyToken, user.getAllUsers);
         app.get('/usuario/cedula/:id/:rol', auth.verifyToken, user.getUserByID);

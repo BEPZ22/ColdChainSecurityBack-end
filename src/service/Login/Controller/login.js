@@ -33,7 +33,8 @@ module.exports = {
             const token = helper.generateToken(response.rows[0].usu_id);
             res.status(200).send({  token , 
                                     'rol' : rol.rows[0].rol_tipo , 
-                                    'id_comercio': response.rows[0].usu_compania_fk
+                                    'id_comercio': response.rows[0].usu_compania_fk,
+                                    'cedula_usuario:' : response.rows[0].usu_cedula
                                 });
 
         } catch (error) {
