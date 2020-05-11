@@ -26,7 +26,7 @@ module.exports = {
         app.put('/unidad', auth.verifyToken, truck.updateTruck);
         app.delete('/unidad', auth.verifyToken, truck.deleteTruck);
 
-        app.get('/almacen', auth.verifyToken, warehouse.getAllWarehouse);
+        app.get('/almacen/:rol/:comercio', auth.verifyToken, warehouse.getAllWarehouse);
         app.get('/almacen/:nombre', auth.verifyToken, warehouse.getWarehouseByWarehouseName);
         app.get('/almacenes', auth.verifyToken, warehouse.getWarehouseName);
         app.post('/almacen', auth.verifyToken, warehouse.createWarehouse);

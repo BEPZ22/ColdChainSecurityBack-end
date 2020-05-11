@@ -8,9 +8,9 @@ const pool = new Pool({
   port: process.env.DATABASE_PORT,
 });
 
-const _createWarehouse = "SELECT create_warehouse( $1 , $2 , $3 , $4 , $5 , $6, $7, $8 , $9, $10 );";
+const _createWarehouse = "SELECT create_warehouse( $1 , $2 , $3 , $4 , $5 , $6, $7, $8 , $9, $10, $11);";
 const _getWarehouseByWarehouse = "SELECT * FROM get_almacen_informacion_by_almacen( $1 );";
-const _getAllWarehouse = "SELECT * FROM get_almacen_informacion();";
+const _getAllWarehouse = "SELECT * FROM get_almacen_informacion($1 , $2);";
 const _updateWarehouse = "SELECT update_warehouse( $1 , $2 , $3 , $4 , $5 , $6, $7, $8 , $9, $10, $11);";
 const _deleteWarehouse = "SELECT delete_warehouse( $1 );";
 const _getWareHouseName = "SELECT almacen_nombre from almacen"
@@ -18,8 +18,10 @@ const _getWareHouseName = "SELECT almacen_nombre from almacen"
 module.exports = {
 
     getAllWarehouse : async function(req, res) {
+      const rol = req.params['rol'];
+      const id_comercio = req.params['comercio'];
         try {
-          const response = await pool.query(_getAllWarehouse);
+          const response = await pool.query(_getAllWarehouse,[rol,id_comercio]);
           res.status(200).send(response.rows);
         } catch (error) {
           res.status(404).send(error);
@@ -47,10 +49,10 @@ module.exports = {
         }
   
       },
-  
+
       createWarehouse : async function (req, res){
   
-          const { nombre, avenida, calle, zona, edificio, apartamento, nro_apartameto, casa, nro_casa, lugar } = req.body
+          const { nombre, avenida, calle, zona, edificio, apartamento, nro_apartameto, casa, nro_casa, lugar, comercio } = req.body
           try{
             const response = await pool.query( _createWarehouse , [ nombre, 
                                                                 avenida, 
@@ -61,7 +63,8 @@ module.exports = {
                                                                 nro_apartameto, 
                                                                 casa, 
                                                                 nro_casa, 
-                                                                lugar]);                   
+                                                                lugar,
+                                                                comercio]);                   
             res.status(200).send({'message':'Almacen creado exitosamente'});
           } catch(error){
             res.status(404).send(error);
