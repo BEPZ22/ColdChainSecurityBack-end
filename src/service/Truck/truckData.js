@@ -10,15 +10,17 @@ const pool = new Pool({
 
 const _createTruck = "SELECT create_truck( $1 , $2 , $3 , $4 , $5 , $6, $7, $8 );";
 const _getTruckByPlate = "SELECT * FROM get_unidad_informacion_by_placa( $1 );";
-const _getAllTrucks = "SELECT * FROM get_unidad_informacion();";
-const _updateTruck = "SELECT update_truck( $1 , $2 , $3 , $4 , $5 , $6, $7, $8);";
+const _getAllTrucks = "SELECT * FROM get_unidad_informacion($1 , $2);";
+const _updateTruck = "SELECT update_truck( $1 , $2 , $3 , $4 , $5 , $6, $7);";
 const _deleteTruck = "SELECT delete_truck( $1 );";
 
 module.exports = {
 
     getAllTrucks : async function(req, res) {
+      const rol = req.params['rol'];
+      const id_comercio = req.params['comercio'];      
         try {
-          const response = await pool.query(_getAllTrucks);
+          const response = await pool.query(_getAllTrucks,[rol,id_comercio]);
           res.status(200).send(response.rows);
         } catch (error) {
           res.status(404).send(error);
@@ -27,7 +29,7 @@ module.exports = {
       },
   
       getTruckByPlate : async function(req, res){
-        const placa = req.params['placa']
+        const placa = req.params['placa'];
         try {
           const response = await pool.query(_getTruckByPlate, [placa]);
           res.status(200).send(response.rows);
@@ -39,7 +41,7 @@ module.exports = {
   
       createTruck : async function (req, res){
   
-          const { conductor, marca, modelo, placa, ano, capacidad, ruta, nombreAlmacen } = req.body
+          const { conductor, marca, modelo, placa, ano, capacidad, ruta, nombreComercio } = req.body
           try{
             const response = await pool.query( _createTruck , [ conductor, 
                                                                marca, 
@@ -48,7 +50,7 @@ module.exports = {
                                                                ano, 
                                                                capacidad,
                                                                ruta,
-                                                               nombreAlmacen]);                   
+                                                               nombreComercio]);                   
             res.status(200).send({'message':'Unidad creada exitosamente'});
           } catch(error){
             res.status(404).send(error);
@@ -58,7 +60,7 @@ module.exports = {
   
       updateTruck : async function(req, res){
         
-        const { conductor, marca, modelo, placa, ano, capacidad,ruta,nombreAlmacen } = req.body
+        const { conductor, marca, modelo, placa, ano, capacidad,ruta} = req.body
         try {
           const response = await pool.query(_updateTruck, [ conductor, 
                                                             marca, 
@@ -66,8 +68,7 @@ module.exports = {
                                                             placa, 
                                                             ano, 
                                                             capacidad,
-                                                            ruta,
-                                                            nombreAlmacen]);
+                                                            ruta]);
           res.status(200).send(response.rows);
         } catch (error) {
           res.status(404).send(error);

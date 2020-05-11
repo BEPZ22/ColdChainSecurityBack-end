@@ -20,7 +20,7 @@ module.exports = {
         app.put('/usuario', auth.verifyToken, user.updateUser);
         app.delete('/usuario', auth.verifyToken, user.deleteUser);
 
-        app.get('/unidad', auth.verifyToken, truck.getAllTrucks);
+        app.get('/unidad/:rol/:comercio', auth.verifyToken, truck.getAllTrucks);
         app.get('/unidad/:placa', auth.verifyToken, truck.getTruckByPlate);
         app.post('/unidad', auth.verifyToken, truck.createTruck);
         app.put('/unidad', auth.verifyToken, truck.updateTruck);
