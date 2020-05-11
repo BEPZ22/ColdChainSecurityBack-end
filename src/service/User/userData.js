@@ -10,18 +10,20 @@ const pool = new Pool({
   port: process.env.DATABASE_PORT,
 });
 
-const _createUser = "SELECT create_user( $1 , $2 , $3 , $4 , $5 , $6 );";
-const _getUserByID = "SELECT * FROM usuario WHERE usu_cedula = $1";
-const _getAllUsers = "SELECT * FROM usuario;";
+const _createUser = "SELECT create_user( $1 , $2 , $3 , $4 , $5 , $6 ,$7, $8 );";
+const _getUserByID = "SELECT get_user_by_id($1 , $2);";
+const _getAllUsers = "SELECT get_all_user($1 , $2);";
 const _getUserByUsername = "SELECT * FROM usuario where usu_usuario = $1;"
-const _updateUser = "SELECT update_user( $1 , $2 , $3 , $4 , $5 , $6 );";
+const _updateUser = "SELECT update_user( $1 , $2 , $3 , $4 , $5 , $6 ,$7, $8);";
 const _deleteUser = "SELECT delete_user( $1 );";
 
 module.exports = {
 
     getAllUsers : async function(req, res) {
+      const rol = req.params['rol'];
+      const id_comercio = req.params['comercio'];
       try {
-        const response = await pool.query(_getAllUsers);
+        const response = await pool.query(_getAllUsers, []);
         return res.status(200).send(response.rows);
       } catch (error) {
         res.status(404).send({'message' : error});
@@ -30,19 +32,20 @@ module.exports = {
     },
 
     getUserByID : async function(req, res){
-      const cedula = req.params['id']
+      const cedula = req.params['id'];
+      const rol = req.params['rol'];
       try {
-        const response = await pool.query(_getUserByID, [cedula]);
+        const response = await pool.query(_getUserByID, [cedula, rol]);
         res.status(200).send(response.rows);
       } catch (error) {
         res.status(404).send({'message' : error});
       }
 
     },
-
+   
     createUser : async function (req, res){
       const hashPassword = helper.hashPassword(req.body.password);
-      const { nombre, apellido, cedula, cargo, username} = req.body
+      const { nombre, apellido, cedula, cargo, username, horario, comercio} = req.body
       
       const validacion = await pool.query(_getUserByUsername, [username]);
 
@@ -60,7 +63,9 @@ module.exports = {
                                                             cedula, 
                                                             cargo, 
                                                             username, 
-                                                            hashPassword]);         
+                                                            hashPassword,
+                                                            horario,
+                                                            comercio]);         
           res.status(201).send({'message':'Usuario creado exitosamente'});
         } catch(error){
           res.status(404).send({'message' : error});
@@ -69,14 +74,17 @@ module.exports = {
     },
 
     updateUser : async function(req, res){
-      const { nombre, apellido, cedula, cargo, username, password } = req.body
+      const hashPassword = helper.hashPassword(req.body.password);
+      const { nombre, apellido, cedula, cargo, username, horario, cedulaOriginal} = req.body
       try {
         const response = await pool.query(_updateUser, [ nombre,
                                                          apellido,
                                                          cedula,
                                                          cargo,
                                                          username,
-                                                         password]);
+                                                         hashPassword,
+                                                         horario,
+                                                         cedulaOriginal]);
         res.status(200).send(response.rows);
       } catch (error) {
         res.status(404).send({'message' : error});
