@@ -4,6 +4,7 @@ const truck = require("./Truck/truckData");
 const warehouse = require("./Warehouse/warehouseData");
 const place = require("./Place/placeData");
 const login = require("./Login/Controller/login");
+const otro = require("./Otros/otros");
 const auth = require("../service/Login/Middleware/authentification")
 
 module.exports = {
@@ -35,6 +36,10 @@ module.exports = {
         
         app.get('/pais', auth.verifyToken, place.getAllCountries);
         app.get('/estado/:pais', auth.verifyToken, place.getAllStatesByCountries);
+
+        app.get('/rol', auth.verifyToken, otro.getAllRol);
+        app.get('/horarioE', auth.verifyToken, otro.getAllEmployeeSchedule);
+        app.get('/horarioC', auth.verifyToken, otro.getAllCommerceSchedule);
 
         app.post('/login', login.login);
     }
