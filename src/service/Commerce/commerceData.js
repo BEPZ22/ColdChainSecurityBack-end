@@ -11,8 +11,8 @@ const pool = new Pool({
 
 const _getAllCommerce = "SELECT * FROM get_comercio($1 , $2 );";
 const _getCommerceById = "SELECT * FROM get_comercio_by_id( $1 );";
-const _getCommerceByName = "SELECT * FROM get_comercio_by_nombre( $1 );";
-const _getCommerceByRif = "SELECT * FROM get_comercio_by_rif( $1 );";
+// const _getCommerceByName = "SELECT * FROM get_comercio_by_nombre( $1 );";
+const _getCommerceByRif = "SELECT * FROM getcomerciobyrif( $1 );";
 const _getCommerceName = "SELECT com_nombre FROM comercio;";
 const _createCommerce = "SELECT create_comercio( $1 , $2 , $3 , $4 , $5 , $6, $7, $8 , $9, $10, $11, $12, $13);";
 const _updateCommerce = "SELECT update_comercio( $1 , $2 , $3 , $4 , $5 , $6, $7, $8 , $9, $10, $11, $12, $13, $14 );";
@@ -43,16 +43,16 @@ module.exports = {
 
     },
 
-    getCommerceByName : async function(req, res){
-      const name = req.params['name'];
-      try {
-        const response = await pool.query(_getCommerceByName, [ name ]);
-        res.status(200).send(response.rows);
-      } catch (error) {
-        res.status(404).send(error);
-      }
+    // getCommerceByName : async function(req, res){
+    //   const name = req.params['name'];
+    //   try {
+    //     const response = await pool.query(_getCommerceByName, [ name ]);
+    //     res.status(200).send(response.rows);
+    //   } catch (error) {
+    //     res.status(404).send(error);
+    //   }
 
-    },
+    // },
 
     getCommerceByRif : async function(req, res){
       const rif = req.params['rif'];
