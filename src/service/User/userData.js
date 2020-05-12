@@ -68,7 +68,7 @@ module.exports = {
           res.status(201).send({'message':'Usuario creado exitosamente'});
           }
       } catch(error){
-        res.status(404).send({'message' : error});
+        res.status(404).send({'message' : error + 'QUE GUEBO'});
       }
 
     },
