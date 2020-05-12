@@ -25,7 +25,7 @@ module.exports = {
         app.get('/comercios', auth.verifyToken, commerce.getCommerceNames);
         app.post('/comercio', auth.verifyToken, commerce.createCommerce);
         app.put('/comercio', auth.verifyToken, commerce.updateCommerce);
-        // app.delete('/comercio', auth.verifyToken, );
+        app.delete('/comercio', auth.verifyToken, commerce.deleteCommerce);
 
         //Usuario
         app.get('/usuario/:rol/:comercio', auth.verifyToken, user.getAllUsers);

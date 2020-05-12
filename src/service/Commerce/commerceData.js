@@ -15,7 +15,7 @@ const _getCommerceByRif = "SELECT * FROM getcomerciobyrif( $1 );";
 const _getCommerceName = "SELECT com_nombre FROM comercio;";
 const _createCommerce = "SELECT create_comercio( $1 , $2 , $3 , $4 , $5 , $6, $7, $8 , $9, $10, $11, $12, $13);";
 const _updateCommerce = "SELECT update_comercio( $1 , $2 , $3 , $4 , $5 , $6, $7, $8 , $9, $10, $11, $12, $13, $14 );";
-// const _deleteCommerce = "SELECT delete_warehouse( $1 );";
+const _deleteCommerce = "SELECT delete_comercio( $1 );";
 
 module.exports = {
 
@@ -111,17 +111,17 @@ module.exports = {
       }
     },
 
-    // deleteCommerce : async function(req, res){
+    deleteCommerce : async function(req, res){
 
-    //   const { placa } = req.body
-    //   try {
-    //     const response = await pool.query(_deleteTruck, [placa]);
-    //     res.status(200).send({'message':'Comercio eliminada exitosamente'});
-    //   } catch (error) {
-    //     res.status(404).send(error);
-    //   }
+      const { rif } = req.body
+      try {
+        const response = await pool.query(_deleteCommerce, [rif]);
+        res.status(200).send({'message':'Comercio eliminado exitosamente'});
+      } catch (error) {
+        res.status(404).send(error);
+      }
 
-    // }
+    }
 
 
 }
