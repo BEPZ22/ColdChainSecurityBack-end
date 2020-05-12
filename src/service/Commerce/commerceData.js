@@ -35,7 +35,7 @@ module.exports = {
     getCommerceById : async function(req, res){
       const id = req.params['id'];
       try {
-        const response = await pool.query(_getCommerceById, [id]);
+        const response = await pool.query(_getCommerceById, [ id ]);
         res.status(200).send(response.rows);
       } catch (error) {
         res.status(404).send(error);
@@ -46,7 +46,7 @@ module.exports = {
     getCommerceByName : async function(req, res){
       const name = req.params['name'];
       try {
-        const response = await pool.query(_getCommerceByName, [name]);
+        const response = await pool.query(_getCommerceByName, [ name ]);
         res.status(200).send(response.rows);
       } catch (error) {
         res.status(404).send(error);
@@ -57,7 +57,7 @@ module.exports = {
     getCommerceByRif : async function(req, res){
       const rif = req.params['rif'];
       try {
-        const response = await pool.query(_getCommerceByRif, [rif]);
+        const response = await pool.query(_getCommerceByRif, [ rif ]);
         res.status(200).send(response.rows);
       } catch (error) {
         res.status(404).send(error);

@@ -20,8 +20,8 @@ module.exports = {
         //Comercio
         app.get('/comercio/:rol/:comercio', auth.verifyToken, commerce.getAllCommerce);
         app.get('/comercio/id/:id', auth.verifyToken, commerce.getCommerceById);
-        app.get('/comercio/name/:name', auth.verifyToken, commerce.getCommerceByName);
-        app.get('/comercio/rif/:rif', auth.verifyToken, commerce.getCommerceByRif);
+        app.get('/comercio/nombre/:name', auth.verifyToken, commerce.getCommerceByName);
+        app.get('/comercio/identificacion/:rif', auth.verifyToken, commerce.getCommerceByRif);
         app.get('/comercios', auth.verifyToken, commerce.getCommerceNames);
         app.post('/comercio', auth.verifyToken, commerce.createCommerce);
         app.put('/comercio', auth.verifyToken, commerce.updateCommerce);
