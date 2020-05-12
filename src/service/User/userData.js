@@ -53,7 +53,7 @@ module.exports = {
           res.status(400).send({'message': 'Introduzca Username y/o Contraseña'});
         }
   
-        if (validacion.rows[0]) {
+        if (!validacion.rows[0]) {
           res.status(400).send({'message': 'El usuario ya existe'});
         }else{
 
