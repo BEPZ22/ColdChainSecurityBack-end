@@ -44,19 +44,18 @@ module.exports = {
     
     createUser : async function (req, res){
       const hashPassword = helper.hashPassword(req.body.password);
-      const { nombre, apellido, cedula, cargo, username, horario, comercio} = req.body
-      
-      const validacion = await pool.query(_getUserByUsername, [username]);
-
-        if (!req.body.username || !req.body.password) {
-          res.status(400).send({'message': 'Introduzca Username y/o Contraseña'});
-        }
-
-        if (!validacion) {
-          res.status(400).send({'message': 'El usuario ya existe'});
-        }
-        
+      const { nombre, apellido, cedula, cargo, username, horario, comercio} = req.body;
         try{
+          const validacion = await pool.query(_getUserByUsername, [username]);
+
+          if (!req.body.username || !req.body.password) {
+            res.status(400).send({'message': 'Introduzca Username y/o Contraseña'});
+          }
+  
+          if (!validacion) {
+            res.status(400).send({'message': 'El usuario ya existe'});
+          }
+
           const response = await pool.query( _createUser , [ nombre, 
                                                             apellido, 
                                                             cedula, 
