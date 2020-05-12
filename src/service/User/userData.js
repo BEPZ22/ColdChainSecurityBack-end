@@ -12,6 +12,7 @@ const pool = new Pool({
 
 const _createUser = "SELECT create_user( $1 , $2 , $3 , $4 , $5 , $6 ,$7, $8 );";
 const _getUserByID = "SELECT (g).* FROM (SELECT get_user_by_id($1 , $2) AS g) as func;";
+const _getUserByUsername = "SELECT usu_id FROM usuario where usu_usuario = $1;";
 const _getAllUsers = "SELECT (g).* FROM (SELECT get_all_user($1 , $2) AS g) as func;";
 const _updateUser = "SELECT update_user( $1 , $2 , $3 , $4 , $5 , $6 ,$7, $8);";
 const _deleteUser = "SELECT delete_user( $1 );";
@@ -45,30 +46,27 @@ module.exports = {
     createUser : async function (req, res){
       const hashPassword = helper.hashPassword(req.body.password);
       const { nombre, apellido, cedula, cargo, username, horario, comercio} = req.body;
- 
+      const validacion = await pool.query(_getUserByUsername, [username]);
+
+      if (!req.body.username || !req.body.password) {
+        res.status(400).send({'message': 'Introduzca Username y/o Contraseña'});
+      }
+
+      if (!validacion) {
+        res.status(400).send({'message': 'El usuario ya existe'});
+      }  
       try{
-        const validacion = await pool.query(_getUserByUsername, [username]);
-
-        if (!req.body.username || !req.body.password) {
-          res.status(400).send({'message': 'Introduzca Username y/o Contraseña'});
-        }
-  
-        if (!validacion.rows[0]) {
-          res.status(400).send({'message': 'El usuario ya existe'});
-        }else{
-
-          const response = await pool.query( _createUser , [ nombre, 
-                                                            apellido, 
-                                                            cedula, 
-                                                            cargo, 
-                                                            username, 
-                                                            hashPassword,
-                                                            horario,
-                                                            comercio]);         
-          res.status(201).send({'message':'Usuario creado exitosamente'});
-          }
+        const response = await pool.query( _createUser , [ nombre, 
+                                                          apellido, 
+                                                          cedula, 
+                                                          cargo, 
+                                                          username, 
+                                                          hashPassword,
+                                                          horario,
+                                                          comercio]);         
+        res.status(201).send({'message':'Usuario creado exitosamente'});
       } catch(error){
-        res.status(404).send({'message' : error + 'QUE GUEBO'});
+        res.status(404).send({'message' : error});
       }
 
     },
