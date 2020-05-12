@@ -5,6 +5,7 @@ const warehouse = require("./Warehouse/warehouseData");
 const place = require("./Place/placeData");
 const login = require("./Login/Controller/login");
 const commerce = require("./Commerce/commerceData");
+const eslabon = require("./StaticUnit/staticUnit");
 const otro = require("./Otros/otros");
 const auth = require("../service/Login/Middleware/authentification")
 
@@ -20,7 +21,6 @@ module.exports = {
         //Comercio
         app.get('/comercio/:rol/:comercio', auth.verifyToken, commerce.getAllCommerce);
         app.get('/comercio/id/:id', auth.verifyToken, commerce.getCommerceById);
-        // app.get('/comercio/nombre/:name', auth.verifyToken, commerce.getCommerceByName);
         app.get('/comercio/:rif', auth.verifyToken, commerce.getCommerceByRif);
         app.get('/comercios', auth.verifyToken, commerce.getCommerceNames);
         app.post('/comercio', auth.verifyToken, commerce.createCommerce);
@@ -49,6 +49,14 @@ module.exports = {
         app.put('/almacen', auth.verifyToken, warehouse.updateWarehouse); 
         app.delete('/almacen', auth.verifyToken, warehouse.deleteWarehouse);
         
+
+        //Unidad Fija / Eslabon Estatico
+        app.get('/eslabonfijo/:rol/:comercio', auth.verifyToken, eslabon.getAllEslabon);
+        app.get('/eslabonfijo/:idserial', auth.verifyToken, eslabon.getEslabonByIdSerial);
+        app.post('/eslabonfijo', auth.verifyToken, eslabon.createEslabon);
+        // app.put('/eslabonfijo', auth.verifyToken, ); 
+        app.delete('/eslabonfijo', auth.verifyToken, eslabon.deleteEslabon);
+
         //Lugar
         app.get('/pais', auth.verifyToken, place.getAllCountries);
         app.get('/estado/:pais', auth.verifyToken, place.getAllStatesByCountries);
