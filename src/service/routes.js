@@ -54,7 +54,7 @@ module.exports = {
         app.get('/eslabonfijo/:rol/:comercio', auth.verifyToken, eslabon.getAllEslabon);
         app.get('/eslabonfijo/:idserial', auth.verifyToken, eslabon.getEslabonByIdSerial);
         app.post('/eslabonfijo', auth.verifyToken, eslabon.createEslabon);
-        // app.put('/eslabonfijo', auth.verifyToken, ); 
+        app.put('/eslabonfijo', auth.verifyToken, eslabon.updateEslabon); 
         app.delete('/eslabonfijo', auth.verifyToken, eslabon.deleteEslabon);
 
         //Lugar

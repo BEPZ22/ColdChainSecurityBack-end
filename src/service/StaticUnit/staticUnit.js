@@ -9,10 +9,10 @@ const pool = new Pool({
 });
 
 
-const _getAllEslabon = "SELECT * FROM get_eslabon_fijo($1 , $2 );";
+const _getAllEslabon = "SELECT * FROM get_eslabon_fijo( $1 , $2 );";
 const _getEslabonByIdSerial = "SELECT * FROM get_eslabon_fijo_by_serial_id( $1 );";
-const _createEslabon = "SELECT create_eslabon_fijo( $1 , $2 , $3 , $4);";
-// const _updateEslabon= "SELECT ( $1 , $2 , $3 , $4 , $5);";
+const _createEslabon = "SELECT create_eslabon_fijo( $1 , $2 , $3 , $4 );";
+const _updateEslabon= "Select update_eslabon( $1, $2 , $3 );";
 const _deleteEslabon = "SELECT delete_eslabon( $1 );";
 
 module.exports = {
@@ -55,20 +55,18 @@ module.exports = {
 
     },
 
-    // updateCommerce: async function(req, res){
+    updateEslabon: async function(req, res){
       
-    //   const { nombre, descripcion, rif, avenida, calle} = req.body
-    //   try {
-    //     const response = await pool.query( _updateCommerce, [ nombre,
-    //                                                       descripcion,
-    //                                                       rif,
-    //                                                       avenida, 
-    //                                                       calle]);
-    //     res.status(200).send(response.rows);
-    //   } catch (error) {
-    //     res.status(404).send(error);
-    //   }
-    // },
+      const { serialId, nombreAlmacenActual, nombreAlmacenEnviar} = req.body
+      try{
+        const response = await pool.query( _updateEslabon , [ serialId,
+                                                              nombreAlmacenActual,
+                                                              nombreAlmacenEnviar]);                   
+        res.status(200).send({'message':'Unidad estatica mudada de Almacen'});
+      } catch (error) {
+        res.status(404).send(error);
+      }
+    },
 
     deleteEslabon : async function(req, res){
 
