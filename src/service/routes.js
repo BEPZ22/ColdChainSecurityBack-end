@@ -44,7 +44,7 @@ module.exports = {
         //Almacen
         app.get('/almacen/:rol/:comercio', auth.verifyToken, warehouse.getAllWarehouse);
         app.get('/almacen/:nombre', auth.verifyToken, warehouse.getWarehouseByWarehouseName);
-        app.get('/almacenes', auth.verifyToken, warehouse.getWarehouseName);
+        app.get('/almacenes/:rol/:id', auth.verifyToken, warehouse.getWarehouseName);
         app.post('/almacen', auth.verifyToken, warehouse.createWarehouse);
         app.put('/almacen', auth.verifyToken, warehouse.updateWarehouse); 
         app.delete('/almacen', auth.verifyToken, warehouse.deleteWarehouse);
