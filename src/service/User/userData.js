@@ -11,9 +11,9 @@ const pool = new Pool({
 });
 
 const _createUser = "SELECT create_user( $1 , $2 , $3 , $4 , $5 , $6 ,$7, $8 );";
-const _getUserByID = "SELECT (g).* FROM (SELECT get_user_by_id($1 , $2) AS g) as func;";
+const _getUserByID = "SELECT * FROM get_user_by_id( $1 );";
 const _getUserByUsername = "SELECT usu_id FROM usuario where usu_usuario = $1;";
-const _getAllUsers = "SELECT (g).* FROM (SELECT get_all_user($1 , $2) AS g) as func;";
+const _getAllUsers = "SELECT * FROM get_all_user($1 , $2);";
 const _updateUser = "SELECT update_user( $1 , $2 , $3 , $4 , $5 , $6 ,$7, $8);";
 const _deleteUser = "SELECT delete_user( $1 );";
 
@@ -32,10 +32,9 @@ module.exports = {
     },
 
     getUserByID : async function(req, res){
-      const cedula = req.params['id'];
-      const rol = req.params['rol'];
+      const cedula = req.params['cedula'];
       try {
-        const response = await pool.query(_getUserByID, [cedula, rol]);
+        const response = await pool.query(_getUserByID, [cedula]);
         res.status(200).send(response.rows);
       } catch (error) {
         res.status(404).send({'message' : error});
