@@ -65,6 +65,9 @@ module.exports = {
         app.get('/rol/:rol', auth.verifyToken, otro.getAllRol);
         app.get('/horarioE', auth.verifyToken, otro.getAllEmployeeSchedule);
         app.get('/horarioC', auth.verifyToken, otro.getAllCommerceSchedule);
+        
+        //Mapa
+        app.get('/mapa', otro.getUrlMap);
 
         //Login
         app.post('/login', login.login);
