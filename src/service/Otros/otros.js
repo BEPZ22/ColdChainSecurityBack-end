@@ -47,7 +47,7 @@ module.exports = {
 
       getUrlMap : async function(req, res){
         try{                
-          res.status(200).send("https://maps.googleapis.com/maps/api/js?key=" + process.env.GOOGLE_MAPS);
+          res.status(200).send(process.env.GOOGLE_MAPS);
         } catch(error){
           res.status(404).send(error);
         }
