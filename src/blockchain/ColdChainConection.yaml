@@ -1,0 +1,63 @@
+name: "ColdChainClient"
+version: "1.0"
+
+client:
+  organization: Coldor
+  credentialStore:
+    path: "./hfc-key-store"
+    cryptoStore:
+      path: "./hfc-key-store"
+      
+channels:
+  coldchannel:
+    orderers:
+      - orderer.coldor.cold-chain.com  
+    peers:
+      devpeer:
+        endorsingPeer: true
+        chaincodeQuery: true
+        ledgerQuery: true
+        eventSource: true
+
+organizations:
+  Coldor:
+    mspid: ColdorMSP
+    peers:
+      - coldpeer.cold-chain.com
+    certificateAuthorities:
+      - ca.coldor.cold-chain.com
+    adminPrivateKey:
+      path: crypto-config/peerOrganizations/coldpeer.cold-chain.com/users/Admin@coldpeer.cold-chain.com/msp/keystore/fec84ea6fb6fb653ebbcf002112da1e7ae95b320b0212c3db8e135fcca0320fa_sk
+    signedCert:
+      path: crypto-config/peerOrganizations/coldpeer.cold-chain.com/users/Admin@coldpeer.cold-chain.com/msp/signcerts/Admin@coldpeer.cold-chain.com-cert.pem
+
+orderers:
+  coldor.cold-chain.com:
+    url: grpcs://54.157.140.196:7050
+    grpcOptions:
+      ssl-target-name-override: coldor.cold-chain.com
+      grpc-max-send-message-length: 5000
+    tlsCACerts:
+      path: crypto-config/ordererOrganizations/coldor.cold-chain.com/orderers/orderer.coldor.cold-chain.com/msp/tlscacerts/tlsca.coldor.cold-chain.com-cert.pem
+
+peers:
+  coldpeer.cold-chain.com:
+    url: grpcs://54.157.140.196:7051
+    eventUrl: grpcs://54.157.140.196:7053
+    grpcOptions:
+      ssl-target-name-override: coldpeer.cold-chain.com
+      grpc.keepalive_time_ms: 600000
+    tlsCACerts:
+      path: crypto-config/peerOrganizations/coldpeer.cold-chain.com/peers/devpeer/msp/tlscacerts/tlsca.coldpeer.cold-chain.com-cert.pem
+
+certificateAuthorities:
+  ca.coldor.cold-chain.com:
+    url: https://54.157.140.196:7050
+    httpOptions:
+      verify: false
+    tlsCACerts:
+      path: crypto-config/peerOrganizations/coldpeer.cold-chain.com/ca/ca.coldpeer.cold-chain.com-cert.pem
+    registrar:
+      - enrollId: admin
+        enrollSecret: adminpw
+    caName: ca-coldor
