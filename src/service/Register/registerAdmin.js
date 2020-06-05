@@ -1,4 +1,4 @@
-var fabricClient = require('./config/FabricClient');
+var Fabric_Client = require('../../blockchain/FabricClient');
 var FabricCAClient = require('fabric-ca-client');
 
 var connection = fabricClient;

@@ -1,4 +1,4 @@
-var Fabric_Client = require('./config/FabricClient');
+var Fabric_Client = require('../../blockchain/FabricClient');
 var Fabric_CA_Client = require('fabric-ca-client');
 
 var path = require('path');
