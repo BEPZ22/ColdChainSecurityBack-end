@@ -27,7 +27,7 @@ organizations:
     certificateAuthorities:
       - ca.coldor.cold-chain.com
     adminPrivateKey:
-      path: ./fec84ea6fb6fb653ebbcf002112da1e7ae95b320b0212c3db8e135fcca0320fa_sk
+      path: ColdChainSecurityBack-end/src/blockchain/fec84ea6fb6fb653ebbcf002112da1e7ae95b320b0212c3db8e135fcca0320fa_sk
     signedCert:
       path: ./Admin@coldpeer.cold-chain.com-cert.pem
 
