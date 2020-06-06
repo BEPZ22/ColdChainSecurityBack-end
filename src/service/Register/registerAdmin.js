@@ -1,7 +1,7 @@
 var Fabric_Client = require('../../blockchain/FabricClient');
 var FabricCAClient = require('fabric-ca-client');
 
-var connection = fabricClient;
+var connection = Fabric_Client;
 var fabricCAClient;
 var adminUser;
 
@@ -23,7 +23,7 @@ connection.initCredentialStores().then(() => {
       console.log('Successfully enrolled admin user "admin"');
       return connection.createUser(
           {username: 'admin',
-              mspid: 'microsoftMSP',
+              mspid: 'ColdorMSP',
               cryptoContent: { privateKeyPEM: enrollment.key.toBytes(), signedCertPEM: enrollment.certificate }
           });
     }).then((user) => {
