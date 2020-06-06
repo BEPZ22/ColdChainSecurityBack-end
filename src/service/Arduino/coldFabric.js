@@ -1,5 +1,5 @@
 'use strict';
-var fabricClient = require('./config/FabricClient');
+var fabricClient = require('../../blockchain/FabricClient');
 
 class ColdFabric {
 

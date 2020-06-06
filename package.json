@@ -23,9 +23,12 @@
     "express": "^4.17.1",
     "fabric-ca-client": "^1.4.8",
     "fabric-client": "^1.4.8",
+    "fs": "0.0.1-security",
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.24.0",
+    "path": "^0.12.7",
     "pg": "^7.18.1",
+    "util": "^0.12.3",
     "uuid": "^7.0.3"
   }
 }
