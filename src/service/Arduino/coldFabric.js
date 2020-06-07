@@ -1,4 +1,3 @@
-'use strict';
 var fabricClient = require('../../blockchain/FabricClient');
 
 class ColdFabric {

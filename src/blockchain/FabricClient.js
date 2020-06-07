@@ -4,7 +4,7 @@ var path = require('path');
 var util = require('util');
 var tx_id = null;
 
-var configFilePath = path.join(__dirname , './ColdChainConnection.json');
+var configFilePath = path.join(__dirname , './ConnectionProfile.json');
 const CONFIG = fs.readFileSync(configFilePath, 'utf8')
 
 class FBClient extends FabricClient {

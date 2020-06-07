@@ -1,8 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const registerAdmin= require("./src/service/Register/registerAdmin");
-const registerUser = require("./src/service/Register/registerUser");
 const routes = require("./src/service/routes");
 const app = express();
 const PORT = process.env.PORT || 3000;

@@ -1,0 +1,86 @@
+{
+	"name": "coldPeerClient",
+	"version": "1.0",
+	"client" : {
+		"organization" : "Coldpeer",
+		"credentialStore" : {
+			"path" : "./hfc-key-store",
+			"cryptoStore" : {
+				"path" : "./hfc-key-store"
+			}
+		}
+	},
+
+	"channels" : {
+        "ColdChannel" : {
+            "orderers" : [ "coldor.cold-chain.com" ],
+            "peers" : {
+                "devpeer" : {
+                    "endorsingPeer": true,
+                    "chaincodeQuery": true,
+                    "ledgerQuery": true,
+                    "eventSource": true
+                }
+            }
+        }
+    },
+
+	"organizations" :{
+        "Coldpeer" : {
+            "mspid" : "ColdpeerMSP",
+            "peers" : [ "coldpeer.cold-chain.com" ],
+            "certificateAuthorities": "ca.coldpeer.cold-chain.com-cert.pem",
+            "adminPrivateKey" : {
+                "fec84ea6fb6fb653ebbcf002112da1e7ae95b320b0212c3db8e135fcca0320fa_sk" : "-----BEGIN PRIVATE KEY-----MIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQgEPLvMGyNjZskxEUV0bkRM0qlhCLAkNA1BIEfoX/fQBehRANCAAR7vnSaAHupcgq6ocRGBmuP2k3lMwVYtT/ibsy6zGYLWZir+3KDOK7rXAoQCEwl26UZisrtVI98mWk1j11U3SUs-----END PRIVATE KEY-----"
+            },
+            "signedCert" : {
+                "pem" : "-----BEGIN CERTIFICATE-----MIICLzCCAdagAwIBAgIRAIKz5Oi3PGDMVYZIiWYiTBowCgYIKoZIzj0EAwIwgYExCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1TYW4gRnJhbmNpc2NvMSAwHgYDVQQKExdjb2xkcGVlci5jb2xkLWNoYWluLmNvbTEjMCEGA1UEAxMaY2EuY29sZHBlZXIuY29sZC1jaGFpbi5jb20wHhcNMjAwNTI4MTQzMjAwWhcNMzAwNTI2MTQzMjAwWjBiMQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZyYW5jaXNjbzEmMCQGA1UEAwwdQWRtaW5AY29sZHBlZXIuY29sZC1jaGFpbi5jb20wWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAAR7vnSaAHupcgq6ocRGBmuP2k3lMwVYtT/ibsy6zGYLWZir+3KDOK7rXAoQCEwl26UZisrtVI98mWk1j11U3SUso00wSzAOBgNVHQ8BAf8EBAMCB4AwDAYDVR0TAQH/BAIwADArBgNVHSMEJDAigCCZ7iwNZXQ293v12hX8z9tHO5exjE8UZbifiyv+3fmr1TAKBggqhkjOPQQDAgNHADBEAiAHAk9fBdfQQHK7D3a6RXFCrcDQxpB9/Q7j8wRhku2EMwIgPQmZ8zEtDJTJbbcZFxU7z3xdwDo8idToRW59aIZFFXw=-----END CERTIFICATE-----"
+            }
+        }
+
+		},
+	"orderers":{
+
+        "orderer.coldor.cold-chain.com" : {
+            "url" : "grpcs://54.157.140.196:7050",
+            "grpcOptions" : {
+                "ssl-target-name-override" : "orderer.coldor.cold-chain.com",
+                "grpc-max-send-message-length" : 5000
+            },
+            "tlsCACerts" : {
+                "pem" : "-----BEGIN CERTIFICATE-----MIICbTCCAhSgAwIBAgIRANtPN51H0kBBD1lcqEus6fkwCgYIKoZIzj0EAwIwgYAxCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1TYW4gRnJhbmNpc2NvMR4wHAYDVQQKExVjb2xkb3IuY29sZC1jaGFpbi5jb20xJDAiBgNVBAMTG3Rsc2NhLmNvbGRvci5jb2xkLWNoYWluLmNvbTAeFw0yMDA1MjgxNDMyMDBaFw0zMDA1MjYxNDMyMDBaMIGAMQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZyYW5jaXNjbzEeMBwGA1UEChMVY29sZG9yLmNvbGQtY2hhaW4uY29tMSQwIgYDVQQDExt0bHNjYS5jb2xkb3IuY29sZC1jaGFpbi5jb20wWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAAQ2dnwKi2CelKVd1vr+//dvq3o9GUgBE5akYRKJR2mz0NhkI156BGnPB630Jdnkn9Afrva/VM85xxlFS87VBTNRo20wazAOBgNVHQ8BAf8EBAMCAaYwHQYDVR0lBBYwFAYIKwYBBQUHAwIGCCsGAQUFBwMBMA8GA1UdEwEB/wQFMAMBAf8wKQYDVR0OBCIEIDEH2ceWmZqQq19SPeGQpVCT03KfxqUGY3NvkWuxvVeFMAoGCCqGSM49BAMCA0cAMEQCIQDcDFrL3p/t5lnKqKElFlyudOYczhBjldUDgVoVp/iM5AIfeC5dvlpHblONDL1+jkmhpiAEKf2NGDVNB6qVmcciFA==-----END CERTIFICATE-----"
+            }
+        }
+
+	},
+
+	"peers" : {
+        "devpeer" : {
+            "url" : "grpcs://54.157.140.196:7051",
+            "event-url" : "grpcs://54.157.140.196:7053",
+            "grpcOptions" : {
+                "ssl-target-name-override" : "devpeer"
+            },
+            "tlsCACerts" : {
+                "pem" : "-----BEGIN CERTIFICATE-----MIICdjCCAhygAwIBAgIRAPmGObpB8TWdsTajz5xM7fswCgYIKoZIzj0EAwIwgYQxCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1TYW4gRnJhbmNpc2NvMSAwHgYDVQQKExdjb2xkcGVlci5jb2xkLWNoYWluLmNvbTEmMCQGA1UEAxMddGxzY2EuY29sZHBlZXIuY29sZC1jaGFpbi5jb20wHhcNMjAwNTI4MTQzMjAwWhcNMzAwNTI2MTQzMjAwWjCBhDELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAUBgNVBAcTDVNhbiBGcmFuY2lzY28xIDAeBgNVBAoTF2NvbGRwZWVyLmNvbGQtY2hhaW4uY29tMSYwJAYDVQQDEx10bHNjYS5jb2xkcGVlci5jb2xkLWNoYWluLmNvbTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABMeFQhy7c1FqInFm8P2bbLpa46f69JSx35UPHEwSuQsHTK+dVgm3tTgavS5r7HwPqxoEmt0JXVC0MiIOQ2SS+1OjbTBrMA4GA1UdDwEB/wQEAwIBpjAdBgNVHSUEFjAUBggrBgEFBQcDAgYIKwYBBQUHAwEwDwYDVR0TAQH/BAUwAwEB/zApBgNVHQ4EIgQgETAtMeIqgqhC/EFBfEk5jsoUBr9ZkMEBRrqVzK4Ty5QwCgYIKoZIzj0EAwIDSAAwRQIhAMuqaw3PCC32+HsKsQFVjWLwTFms6M9X+cA/cOgLiYYlAiBHs35g8HSUBquNbgCeRvHdlYdwIAA/5a6BFTBSOwUVzQ==-----END CERTIFICATE-----"
+            }
+        }
+	},
+
+	"certificateAuthorities" :{
+		"ca.coldpeer.cold-chain.com" : {
+			"url" : "https://54.157.140.196:7054",
+			"httpOptions" : {
+				"verify" : true
+			},
+			"tlsCACerts" : {
+				"pem" : "-----BEGIN CERTIFICATE-----MIICcDCCAhagAwIBAgIRAM1E37AynTMiMdtzsyecIUAwCgYIKoZIzj0EAwIwgYExCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1TYW4gRnJhbmNpc2NvMSAwHgYDVQQKExdjb2xkcGVlci5jb2xkLWNoYWluLmNvbTEjMCEGA1UEAxMaY2EuY29sZHBlZXIuY29sZC1jaGFpbi5jb20wHhcNMjAwNTI4MTQzMjAwWhcNMzAwNTI2MTQzMjAwWjCBgTELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAUBgNVBAcTDVNhbiBGcmFuY2lzY28xIDAeBgNVBAoTF2NvbGRwZWVyLmNvbGQtY2hhaW4uY29tMSMwIQYDVQQDExpjYS5jb2xkcGVlci5jb2xkLWNoYWluLmNvbTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABPYv8p2hlniAqmoSULdY/RE0O7BFL8PzphT70Cx1UzkC0jdmcMZdA8lU3cZG2+9PPb59/As/TX0EKiRA8DB09tyjbTBrMA4GA1UdDwEB/wQEAwIBpjAdBgNVHSUEFjAUBggrBgEFBQcDAgYIKwYBBQUHAwEwDwYDVR0TAQH/BAUwAwEB/zApBgNVHQ4EIgQgme4sDWV0Nvd79doV/M/bRzuXsYxPFGW4n4sr/t35q9UwCgYIKoZIzj0EAwIDSAAwRQIhAOc9nZ0EpHPF6UXviFVp7x+hSbRlF8uoLpJ4KQda/jotAiBLIefmg83paBGnULhnosJ7IGao3lJStTbq1RH5Q6bQfw==-----END CERTIFICATE-----"
+            },
+            "registrar" : [{
+                "enrollId" : "admin",
+                "enrollSecret" : "adminpw"
+            }],
+            "caName" : "ca.coldpeer.cold-chain.com"
+        }
+	}	
+}

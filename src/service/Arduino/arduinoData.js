@@ -82,13 +82,19 @@ module.exports = {
     },
 
     getAllHLF : function(req, res){
-        coldFabric.init().then(function(){
-            return coldFabric.queryAllArduinoData()
-        }).then(function(data){
+        try {
+            data = coldFabric.queryAllArduinoData()
             res.status(200).json(data)
-        }).catch(function(err){
-            res.status(500).json({error: err.toString()})
-        })
+        } catch (error) {
+            res.status(500).json({error: error.toString()})
+        }
+        // coldFabric.init().then(function(){
+        //     return coldFabric.queryAllArduinoData()
+        // }).then(function(data){
+        //     res.status(200).json(data)
+        // }).catch(function(err){
+        //     res.status(500).json({error: error.toString()})
+        // })
     }
 
 
