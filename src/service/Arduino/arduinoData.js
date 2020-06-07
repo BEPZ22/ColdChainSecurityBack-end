@@ -1,4 +1,4 @@
-var ColdFabric = require('./coldFabric').ColdFabric;
+var ColdFabric = require('./coldFabric');
 
 let data = [];
 let coldFabric = new ColdFabric();
