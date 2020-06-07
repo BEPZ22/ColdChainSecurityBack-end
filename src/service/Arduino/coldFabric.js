@@ -2,10 +2,14 @@ var fabricClient = require('../../blockchain/FabricClient');
 
 class ColdFabric {
 
-  constructor(userName) {
-    this.currentUser;
-    this.issuer;
-    this.userName = userName;
+  // constructor(userName) {
+  //   this.currentUser;
+  //   this.issuer;
+  //   this.userName = userName;
+  //   this.connection = fabricClient;
+  // }
+
+  constructor(){
     this.connection = fabricClient;
   }
 

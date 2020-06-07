@@ -1,7 +1,8 @@
-var coldFabric = require('./coldFabric').ColdFabric;
+var ColdFabric = require('./coldFabric').ColdFabric;
 
-let data = 
-        [];
+let data = [];
+let coldFabric = new ColdFabric();
+
 
 module.exports = {
 	// ObjectType 	string `json:"docType"`
@@ -82,11 +83,12 @@ module.exports = {
     },
 
     getAllHLF : function(req, res){
+        
         try {
-            data = coldFabric.queryAllArduinoData()
-            res.status(200).json(data)
+            data = await coldFabric.queryAllArduinoData();
+            res.status(200).json(data);
         } catch (error) {
-            res.status(500).json({error: error.toString()})
+            res.status(500).json({error: error.toString()});
         }
         // coldFabric.init().then(function(){
         //     return coldFabric.queryAllArduinoData()
