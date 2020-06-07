@@ -85,7 +85,7 @@ module.exports = {
     getAllHLF : function(req, res){
         
         try {
-            data = await coldFabric.queryAllArduinoData();
+            data = coldFabric.queryAllArduinoData();
             res.status(200).json(data);
         } catch (error) {
             res.status(500).json({error: error.toString()});
