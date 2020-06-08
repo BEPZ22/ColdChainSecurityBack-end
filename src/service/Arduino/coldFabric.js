@@ -52,7 +52,7 @@ class ColdFabric {
     var requestData = {
       chaincodeId: 'cc-cold',
       fcn: 'createArduinoData',
-      args: [arduino.id,arduino.lg,arduino.lt,arduino.tp,arduino.dt,arduino.un,arduino.wh,arduino.co,arduino.ua],
+      args: [arduino.id, arduino.un, arduino.wh,arduino.lt,arduino.lg,arduino.tp,arduino.dt,arduino.co,arduino.ua],
       txId: tx_id
     };
     return this.connection.submitTransaction(requestData,tx_id);

@@ -16,9 +16,8 @@ module.exports = {
         //Arduino
         app.get('/arduino', arduino.getData);
         app.get('/arduino/addData/:Id/:Lg/:Lt/:Tp/:Dt/:Un/:Wh/:Co/:Ua', arduino.addData);
-        app.post('/hlf', arduino.addData2);
+        app.post('/hlf', arduino.addDataHLF);
         app.get('/hlf', arduino.getAllHLF);
-        // app.post('/hpf')
         
         //Comercio
         app.get('/comercio/:rol/:comercio', auth.verifyToken, commerce.getAllCommerce);

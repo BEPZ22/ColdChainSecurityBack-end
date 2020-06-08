@@ -43,19 +43,19 @@ module.exports = {
         }
 
     },
-    // ?Id=1&Lg=10&Lt=10&Tp=10&Dt=5/9/2020 3:55&Un=XLRT2EWR&Wh=ColdChainSecurity4&Co=Farmatodo&Ua=123w2343
-    addData2 : function( req, res) {
+   
+    addDataHLF : function( req, res) {
         
         var arduino = {
-            id : req.query.Id ,
-            lg : req.query.Lg,
-            lt : req.query.Lt,
-            tp : req.query.Tp, 
-            dt : req.query.Dt,
-            un : req.query.Un,
-            wh : req.query.Wh,
-            co : req.query.Co,
-            ua : req.query.Ua
+            id : req.body.id ,
+            lg : req.body.lg,
+            lt : req.body.Lt,
+            tp : req.body.lt, 
+            dt : req.body.dt,
+            un : req.body.un,
+            wh : req.body.wh,
+            co : req.body.co,
+            ua : req.body.ua
         }
  
         try {
