@@ -1,7 +1,7 @@
 var ColdFabric = require('./coldFabric');
 
 let data = [];
-let coldFabric = new ColdFabric();
+
 
 
 module.exports = {
@@ -45,7 +45,7 @@ module.exports = {
     },
    
     addDataHLF : function( req, res) {
-        
+        let coldFabric = new ColdFabric();
         var arduino = {
             id : req.body.id ,
             lg : req.body.lg,
@@ -60,14 +60,14 @@ module.exports = {
  
         try {
             data = coldFabric.addArduinoData(arduino);
-            res.status(200).json(data);
+            res.status(200).json("Tu eres Marico?", data);
         } catch (error) {
             res.status(500).json({error: error.toString()});
         }
     },
 
     getAllHLF : function(req, res){
-        
+        let coldFabric = new ColdFabric();
         try {
             data = coldFabric.queryAllArduinoData();
             res.status(200).json(data);
