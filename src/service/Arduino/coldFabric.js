@@ -15,9 +15,11 @@ class ColdFabric {
 
   init() {
     var isAdmin = false;
+
     if (this.userName == "admin") {
       isAdmin = true;
     }
+
     return this.connection.initCredentialStores().then(() => {
       return this.connection.getUserContext(this.userName, true)
     }).then((user) => {
@@ -33,6 +35,7 @@ class ColdFabric {
   }
 
   queryAllArduinoData() {
+    this.connection.setAdminSigningIdentity(process.env.HLF_PRIVATE_KEY,process.env.HLF_SIGN_CERT,"ColdpeerMSP");
     var tx_id = this.connection.newTransactionID();
     var requestData = {
       chaincodeId: 'cc-cold',
