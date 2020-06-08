@@ -46,38 +46,17 @@ class ColdFabric {
     return this.connection.query(requestData);
   }
 
-//   queryLaptop(id) {
-//     var tx_id = this.connection.newTransactionID();
-//     var requestData = {
-//       chaincodeId: 'mycontract',
-//       fcn: 'queryLaptop',
-//       args: [id],
-//       txId: tx_id
-//     };
-//     return this.connection.query(requestData);
-//   }
-
-//   deleteLaptop(id) {
-//     var tx_id = this.connection.newTransactionID();
-//     var requestData = {
-//       chaincodeId: 'mycontract',
-//       fcn: 'deleteLaptop',
-//       args: [id],
-//       txId: tx_id
-//     };
-//     return this.connection.submitTransaction(requestData,tx_id);
-//   }
-
-//   add_laptop(laptop) {
-//     var tx_id = this.connection.newTransactionID();
-//     var requestData = {
-//       chaincodeId: 'mycontract',
-//       fcn: 'createLaptop',
-//       args: [laptop.id,laptop.marca,laptop.modelo,laptop.color,laptop.propietario],
-//       txId: tx_id
-//     };
-//     return this.connection.submitTransaction(requestData,tx_id);
-//   }
+  addArduinoData(arduino) {
+    this.connection.setAdminSigningIdentity(process.env.HLF_PRIVATE_KEY,process.env.HLF_SIGN_CERT,"ColdpeerMSP");
+    var tx_id = this.connection.newTransactionID(true);
+    var requestData = {
+      chaincodeId: 'cc-cold',
+      fcn: 'createArduinoData',
+      args: [arduino.id,arduino.lg,arduino.lt,arduino.tp,arduino.dt,arduino.un,arduino.wh,arduino.co,arduino.ua],
+      txId: tx_id
+    };
+    return this.connection.submitTransaction(requestData,tx_id);
+  }
 }
 
 module.exports = ColdFabric;
