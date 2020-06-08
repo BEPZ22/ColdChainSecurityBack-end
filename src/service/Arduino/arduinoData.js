@@ -44,7 +44,7 @@ module.exports = {
 
     },
    
-    addDataHLF : function( req, res) {
+    addDataHLF : async function( req, res) {
         let coldFabric = new ColdFabric();
         var arduino = {
             id : req.body.id ,
