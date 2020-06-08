@@ -35,7 +35,7 @@ class ColdFabric {
   }
 
   queryAllArduinoData() {
-    this.connection.setAdminSigningIdentity(process.env.HLF_PRIVATE_KEY,process.env.HLF_SIGN_CERT,"ColdpeerMSP");
+    this.connection.setAdminSigningIdentity(process.env.HLF_PRIVATE_KEY.toString,process.env.HLF_SIGN_CERT.toString,"ColdpeerMSP");
     var tx_id = this.connection.newTransactionID();
     var requestData = {
       chaincodeId: 'cc-cold',
