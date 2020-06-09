@@ -59,19 +59,20 @@ module.exports = {
         }
  
         try {
-            data = coldFabric.addArduinoData(arduino);
+            data = await coldFabric.addArduinoData(arduino);
             res.status(200).json(data);
-            
+            res.end();
         } catch (error) {
             res.status(500).json({error: error.toString()});
         }
     },
 
-    getAllHLF : async function(req, res){
+    getAllHLF : function(req, res){
         let coldFabric = new ColdFabric();
         try {
             data = await coldFabric.queryAllArduinoData();
             res.status(200).json(data);
+            res.end();
         } catch (error) {
             res.status(500).json({error: error.toString()});
         }

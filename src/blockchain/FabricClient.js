@@ -96,6 +96,9 @@ class FBClient extends FabricClient {
             }
         }).then(function () {
             return {"trans_id":tx_id["_transaction_id"]};
+        }).catch( (error) => {
+            console.log('handle error here: ', error.message)
+            return('handle error here: ', error.message)
         })
     }
 
@@ -113,9 +116,11 @@ class FBClient extends FabricClient {
                         return item;
                     }
                 })
-            }
-            
+            }        
             return resultData;
+        }).catch((error) => {
+            console.log('handle error here: ', error.message)
+            return ('handle error here: ', error.message)
         });
     }
 }
