@@ -47,7 +47,7 @@ class ColdFabric {
   }
 
   addArduinoData(arduino) {
-    this.connection.setAdminSigningIdentity(process.env.HLF_PRIVATE_KEY,process.env.HLF_SIGN_CERT,"ColdpeerMSP");
+    this.connection.setAdminSigningIdentity(process.env.HLF_PRIVATE_KEY.replace(/\r/, ""),process.env.HLF_SIGN_CERT.replace(/\r/, ""),"ColdpeerMSP");
     console.log(arduino.id)
     var tx_id = this.connection.newTransactionID(true);
     var requestData = {
