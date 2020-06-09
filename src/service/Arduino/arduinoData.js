@@ -44,7 +44,7 @@ module.exports = {
 
     },
    
-    addDataHLF :  function( req, res) {
+    addDataHLF : async function( req, res) {
         let coldFabric = new ColdFabric();
         var arduino = {
             id : req.body.id ,
@@ -59,10 +59,10 @@ module.exports = {
         }
  
         try {
-            data =  coldFabric.addArduinoData(arduino);
+            data = await coldFabric.addArduinoData(arduino);
             res.status(200).send({"message":"Informacion almacenada de manera exitosa"});
         } catch (error) {
-            res.status(500).json({error: error.toString()});
+            res.status(500).send({error: "Error desde Heroku " + error.toString()});
         }
     },
 
@@ -70,7 +70,7 @@ module.exports = {
         let coldFabric = new ColdFabric();
         try {
             data =  coldFabric.queryAllArduinoData();
-            res.status(200).json(data);
+            res.status(200).send(JSON.stringify(data[0]));
         } catch (error) {
             res.status(500).json({error: error.toString()});
         }
