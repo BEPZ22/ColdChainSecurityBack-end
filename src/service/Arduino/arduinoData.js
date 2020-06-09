@@ -44,7 +44,7 @@ module.exports = {
 
     },
    
-    addDataHLF : async function( req, res) {
+    addDataHLF :  function( req, res) {
         let coldFabric = new ColdFabric();
         var arduino = {
             id : req.body.id ,
@@ -59,7 +59,7 @@ module.exports = {
         }
  
         try {
-            data = await coldFabric.addArduinoData(arduino);
+            data =  coldFabric.addArduinoData(arduino);
             res.status(200).json(data);
             res.end();
         } catch (error) {
@@ -67,10 +67,10 @@ module.exports = {
         }
     },
 
-    getAllHLF : async function(req, res){
+    getAllHLF :  function(req, res){
         let coldFabric = new ColdFabric();
         try {
-            data = await coldFabric.queryAllArduinoData();
+            data =  coldFabric.queryAllArduinoData();
             res.status(200).json(data);
             res.end();
         } catch (error) {
