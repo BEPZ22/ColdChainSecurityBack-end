@@ -60,8 +60,7 @@ module.exports = {
  
         try {
             data =  coldFabric.addArduinoData(arduino);
-            res.status(200).json(data);
-            res.end();
+            res.status(200).send({"message":"Informacion almacenada de manera exitosa"});
         } catch (error) {
             res.status(500).json({error: error.toString()});
         }
@@ -72,7 +71,6 @@ module.exports = {
         try {
             data =  coldFabric.queryAllArduinoData();
             res.status(200).json(data);
-            res.end();
         } catch (error) {
             res.status(500).json({error: error.toString()});
         }
