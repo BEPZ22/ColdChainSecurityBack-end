@@ -56,6 +56,7 @@ class ColdFabric {
       args: [arduino.id, arduino.un, arduino.wh,arduino.lt,arduino.lg,arduino.tp,arduino.dt,arduino.co,arduino.ua],
       txId: tx_id
     };
+    console.log(requestData)
     return this.connection.submitTransaction(requestData,tx_id);
   }
 }
