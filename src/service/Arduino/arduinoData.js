@@ -59,7 +59,8 @@ module.exports = {
         }
  
         try {
-            data = await coldFabric.addArduinoData(JSON.stringify(arduino));
+            console.log(arduino)
+            data = await coldFabric.addArduinoData(arduino);
             res.status(200).send({"message":"Informacion almacenada de manera exitosa"});
         } catch (error) {
             res.status(500).send({error: "Error desde Heroku " + error.toString()});
