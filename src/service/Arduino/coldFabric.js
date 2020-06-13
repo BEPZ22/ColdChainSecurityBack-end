@@ -1,4 +1,6 @@
 var fabricClient = require('../../blockchain/FabricClient');
+var private_key = JSON.parse(process.env.HLF_PRIVATE_KEY);
+var sign_cert = JSON.parse(process.env.HLF_SIGN_CERT);
 
 class ColdFabric {
 
@@ -35,7 +37,7 @@ class ColdFabric {
   }
 
   queryAllArduinoData() {
-    this.connection.setAdminSigningIdentity(process.env.HLF_PRIVATE_KEY,process.env.HLF_SIGN_CERT,"ColdpeerMSP");
+    this.connection.setAdminSigningIdentity(private_key,sign_cert,"ColdpeerMSP");
     var tx_id = this.connection.newTransactionID(true);
     var requestData = {
       chaincodeId: 'cc-cold',

@@ -108,7 +108,7 @@ class FBClient extends FabricClient {
 
     query(requestData) {
         var channel = this.getChannel();
-        console.log("LogCCSchannel: " + channel);
+        console.log("\nLogCCSchannel: " + channel);
         return channel.queryByChaincode(requestData).then((response_payloads) => {
             var resultData = JSON.parse(response_payloads.toString('utf8'));
             console.log("\nLogGetCCS resultData1: " + resultData)
