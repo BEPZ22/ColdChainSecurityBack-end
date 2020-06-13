@@ -49,8 +49,8 @@ module.exports = {
         var arduino = {
             id : req.body.id ,
             lg : req.body.lg,
-            lt : req.body.Lt,
-            tp : req.body.lt, 
+            lt : req.body.lt,
+            tp : req.body.tp, 
             dt : req.body.dt,
             un : req.body.un,
             wh : req.body.wh,
