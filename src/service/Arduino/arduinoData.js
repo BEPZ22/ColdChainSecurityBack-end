@@ -70,7 +70,7 @@ module.exports = {
         let coldFabric = new ColdFabric();
         try {
             data =  coldFabric.queryAllArduinoData();
-            res.status(200).send(JSON.stringify(data));
+            res.status(200).send(JSON.stringify(JSON.parse(data)));
         } catch (error) {
             res.status(500).json({error: "Error desde Heroku" + error.toString()});
         }
