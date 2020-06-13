@@ -14,8 +14,8 @@ class FBClient extends FabricClient {
 
     submitTransaction(requestData,txid) {
         var _this = this;
-        var channel = this.getChannel()[0];
-        var peer = this.getPeersForOrg()[0];
+        var channel = this.getChannel();
+        var peer = this.getPeersForOrg(); //  this.getPeersForOrg();[0]
         tx_id = txid;
         console.log("\nlogCCSchannel: " + channel + "\n" + "logCCSpeer: " + peer + "\n")
         return channel.sendTransactionProposal(requestData).then(function (results) {
