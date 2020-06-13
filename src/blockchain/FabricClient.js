@@ -17,9 +17,9 @@ class FBClient extends FabricClient {
         var channel = this.getChannel();
         var peer = this.getPeersForOrg()[0];
         tx_id = txid;
-        console.log(channel + "\n" + peer)
+        console.log(channel + "jeje\n" + peer)
         return channel.sendTransactionProposal(requestData).then(function (results) {
-            console.log(results);
+            console.log("jeje " + results);
             var proposalResponses = results[0];
 	        var proposal = results[1];
 	        let isProposalGood = false;
