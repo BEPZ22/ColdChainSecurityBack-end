@@ -111,6 +111,7 @@ class FBClient extends FabricClient {
         console.log("LogCCSchannel: " + channel);
         return channel.queryByChaincode(requestData).then((response_payloads) => {
             var resultData = JSON.parse(response_payloads.toString('utf8'));
+            console.log("\nLogGetCCS resultData1: " + resultData)
             return resultData;
         }).then(function(resultData) {
             if (resultData.constructor === Array) {
@@ -121,7 +122,8 @@ class FBClient extends FabricClient {
                         return item;
                     }
                 })
-            }        
+            }
+            console.log("\nLogGetCCS resultData2: " + resultData)        
             return resultData;
         }).catch((error) => {
             console.log('\nhandle error here: ', error.message)
