@@ -59,7 +59,6 @@ module.exports = {
         }
  
         try {
-            console.log(arduino)
             data = await coldFabric.addArduinoData(arduino);
             res.status(200).send({"message":"Informacion almacenada de manera exitosa"});
         } catch (error) {

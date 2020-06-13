@@ -13,7 +13,7 @@
 
 	"channels" : {
         "coldchannel" : {
-            "orderers" : [ "coldor.cold-chain.com" ],
+            "orderers" : [ "orderer.coldor.cold-chain.com" ],
             "peers" : {
                 "devpeer" : {
                     "endorsingPeer": true,
