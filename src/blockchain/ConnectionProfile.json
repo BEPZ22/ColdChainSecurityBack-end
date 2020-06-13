@@ -42,7 +42,7 @@
 	"orderers":{
 
         "orderer.coldor.cold-chain.com" : {
-            "url" : "grpcs://54.157.140.196:7050",
+            "url" : "grpc://54.157.140.196:7050",
             "grpcOptions" : {
                 "ssl-target-name-override" : "orderer.coldor.cold-chain.com",
                 "grpc-max-send-message-length" : 5000
@@ -56,8 +56,8 @@
 
 	"peers" : {
         "devpeer" : {
-            "url" : "grpcs://54.157.140.196:7051",
-            "event-url" : "grpcs://54.157.140.196:7053",
+            "url" : "grpc://54.157.140.196:7051",
+            "event-url" : "grpc://54.157.140.196:7053",
             "grpcOptions" : {
                 "ssl-target-name-override" : "devpeer"
             },
