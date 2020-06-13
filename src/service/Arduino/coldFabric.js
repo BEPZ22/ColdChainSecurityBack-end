@@ -1,6 +1,6 @@
 var fabricClient = require('../../blockchain/FabricClient');
-var private_key = JSON.parse(process.env.HLF_PRIVATE_KEY);
-var sign_cert = JSON.parse(process.env.HLF_SIGN_CERT);
+var private_key = process.env.HLF_PRIVATE_KEY
+var sign_cert = process.env.HLF_SIGN_CERT
 
 class ColdFabric {
 
