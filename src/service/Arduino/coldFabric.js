@@ -60,5 +60,10 @@ class ColdFabric {
     return this.connection.submitTransaction(requestData,tx_id);
   }
 }
-
+// "credentialStore" : {
+//   "path" : "./hfc-key-store",
+//   "cryptoStore" : {
+//       "path" : "./hfc-key-store"
+//   }
+// },
 module.exports = ColdFabric;
