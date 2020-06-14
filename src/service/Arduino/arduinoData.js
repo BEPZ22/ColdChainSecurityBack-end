@@ -74,13 +74,19 @@ module.exports = {
 
     getAllHLF :  function(req, res){
         let coldFabric = new ColdFabric();
-        coldFabric.init().then(function() {
-            return coldFabric.queryAllArduinoData()
-          }).then(function (data) {
-            res.status(200).json(data)
-          }).catch(function(err) {
-            res.status(500).json({error: err.toString()})
-          })
+        // coldFabric.init().then(function() {
+        //     return coldFabric.queryAllArduinoData()
+        //   }).then(function (data) {
+        //     res.status(200).json(data)
+        //   }).catch(function(err) {
+        //     res.status(500).json({error: err.toString()})
+        //   })
+        try {
+            data = await coldFabric.queryAllArduinoData();
+            res.status(200).send({"message":"Informacion almacenada de manera exitosa"});
+        } catch (error) {
+            res.status(500).send({error: "Error desde Heroku " + error.toString()});
+        }
 
     }, 
 

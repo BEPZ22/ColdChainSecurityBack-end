@@ -23,8 +23,8 @@ class ColdFabric {
     }
 
     // return this.connection.initCredentialStores().then(() => {
-    return this.connection.setAdminSigningIdentity(private_key,sign_cert,"ColdpeerMSP").then(() => {
-      return this.connection.getUserContext(this.userName, true)
+    // return this.connection.setAdminSigningIdentity(private_key,sign_cert,"ColdpeerMSP")
+      return this.connection.getUserContext(this.userName, true).then(() => {
     }).then((user) => {
       this.issuer = user;
       if (isAdmin) {
@@ -38,7 +38,7 @@ class ColdFabric {
   }
 
   queryAllArduinoData() {
-    // this.connection.setAdminSigningIdentity(private_key,sign_cert,"ColdpeerMSP");
+    this.connection.setAdminSigningIdentity(private_key,sign_cert,"ColdpeerMSP");
     var tx_id = this.connection.newTransactionID();
     var requestData = {
       chaincodeId: 'cc-cold',
@@ -50,7 +50,7 @@ class ColdFabric {
   }
 
   addArduinoData(arduino) {
-    // this.connection.setAdminSigningIdentity(process.env.HLF_PRIVATE_KEY,process.env.HLF_SIGN_CERT,"ColdpeerMSP");
+    this.connection.setAdminSigningIdentity(private_key,sign_cert,"ColdpeerMSP");
     var tx_id = this.connection.newTransactionID();
     var requestData = {
       chaincodeId: 'cc-cold',
