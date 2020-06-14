@@ -83,7 +83,7 @@ module.exports = {
         //   })
         try {
             data = await coldFabric.queryAllArduinoData();
-            res.status(200).send({"message":"Informacion almacenada de manera exitosa"});
+            res.status(200).json(data);
         } catch (error) {
             res.status(500).send({error: "Error desde Heroku " + error.toString()});
         }
