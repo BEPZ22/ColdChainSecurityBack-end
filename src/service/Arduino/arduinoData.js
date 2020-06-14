@@ -72,7 +72,7 @@ module.exports = {
         // }
     },
 
-    getAllHLF :  function(req, res){
+    getAllHLF : async function(req, res){
         let coldFabric = new ColdFabric();
         // coldFabric.init().then(function() {
         //     return coldFabric.queryAllArduinoData()
