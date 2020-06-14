@@ -7,9 +7,9 @@
             "client" : {
                 "organization" : "Coldpeer",
                 "credentialStore" : {
-                    "c067f270e28580952fa089e93dfe20168bb76758e23eec55e245d75b03dc8bf6_sk": "-----BEGIN PRIVATE KEY-----\nMIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQgqq+gau3Dktxk8HDW\ngf95WgkXbjMjMJnvjnVRdm4y5GKhRANCAASJL378CxfITUDviX3VB/i2JqZQJ/bh\n4jcLHrm4qlVKPrxvAeW2vW1V5WqUCtLzPwPeYrqIiS5k+851/TF15br7\n-----END PRIVATE KEY-----\n",
+                    "keyStore": "-----BEGIN PRIVATE KEY-----\nMIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQgqq+gau3Dktxk8HDW\ngf95WgkXbjMjMJnvjnVRdm4y5GKhRANCAASJL378CxfITUDviX3VB/i2JqZQJ/bh\n4jcLHrm4qlVKPrxvAeW2vW1V5WqUCtLzPwPeYrqIiS5k+851/TF15br7\n-----END PRIVATE KEY-----\n",
                     "cryptoStore" : {
-                        "c067f270e28580952fa089e93dfe20168bb76758e23eec55e245d75b03dc8bf6_sk": "-----BEGIN PRIVATE KEY-----\nMIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQgqq+gau3Dktxk8HDW\ngf95WgkXbjMjMJnvjnVRdm4y5GKhRANCAASJL378CxfITUDviX3VB/i2JqZQJ/bh\n4jcLHrm4qlVKPrxvAeW2vW1V5WqUCtLzPwPeYrqIiS5k+851/TF15br7\n-----END PRIVATE KEY-----\n"
+                        "keyStore": "-----BEGIN PRIVATE KEY-----\nMIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQgqq+gau3Dktxk8HDW\ngf95WgkXbjMjMJnvjnVRdm4y5GKhRANCAASJL378CxfITUDviX3VB/i2JqZQJ/bh\n4jcLHrm4qlVKPrxvAeW2vW1V5WqUCtLzPwPeYrqIiS5k+851/TF15br7\n-----END PRIVATE KEY-----\n"
                     }
                 },
                 "clientPrivateKey": "-----BEGIN PRIVATE KEY-----\nMIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQgqq+gau3Dktxk8HDW\ngf95WgkXbjMjMJnvjnVRdm4y5GKhRANCAASJL378CxfITUDviX3VB/i2JqZQJ/bh\n4jcLHrm4qlVKPrxvAeW2vW1V5WqUCtLzPwPeYrqIiS5k+851/TF15br7\n-----END PRIVATE KEY-----\n",
