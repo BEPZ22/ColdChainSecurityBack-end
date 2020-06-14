@@ -44,7 +44,7 @@ module.exports = {
 
     },
    
-    addDataHLF : async function( req, res) {
+    addDataHLF : function( req, res) {
         let coldFabric = new ColdFabric();
         var arduino = {
             id : req.body.id ,
@@ -57,23 +57,31 @@ module.exports = {
             co : req.body.co,
             ua : req.body.ua
         }
- 
-        try {
-            data = await coldFabric.addArduinoData(arduino);
-            res.status(200).send({"message":"Informacion almacenada de manera exitosa"});
-        } catch (error) {
-            res.status(500).send({error: "Error desde Heroku " + error.toString()});
-        }
+        coldFabric.init().then(function() {
+            return coldFabric.addArduinoData(arduino)
+          }).then(function (data) {
+            res.status(200).json(data)
+          }).catch(function(err) {
+            res.status(500).json({error: err.toString()})
+          })
+        // try {
+        //     data = await coldFabric.addArduinoData(arduino);
+        //     res.status(200).send({"message":"Informacion almacenada de manera exitosa"});
+        // } catch (error) {
+        //     res.status(500).send({error: "Error desde Heroku " + error.toString()});
+        // }
     },
 
     getAllHLF :  function(req, res){
         let coldFabric = new ColdFabric();
-        try {
-            data =  coldFabric.queryAllArduinoData();
-            res.status(200).send(JSON.parse(JSON.stringify(data[0])));
-        } catch (error) {
-            res.status(500).json({error: "Error desde Heroku" + error.toString()});
-        }
+        coldFabric.init().then(function() {
+            return coldFabric.queryAllArduinoData()
+          }).then(function (data) {
+            res.status(200).json(data)
+          }).catch(function(err) {
+            res.status(500).json({error: err.toString()})
+          })
+
     }, 
 
 };

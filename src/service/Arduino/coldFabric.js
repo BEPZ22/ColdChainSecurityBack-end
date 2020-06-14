@@ -4,21 +4,21 @@ var sign_cert = process.env.HLF_SIGN_CERT
 
 class ColdFabric {
 
-  // constructor(userName) {
-  //   this.currentUser;
-  //   this.issuer;
-  //   this.userName = userName;
-  //   this.connection = fabricClient;
-  // }
-
-  constructor(){
+  constructor() {
+    this.currentUser;
+    this.issuer;
+    this.userName = "User1@coldpeer.cold-chain.com";
     this.connection = fabricClient;
   }
+
+  // constructor(){
+  //   this.connection = fabricClient;
+  // }
 
   init() {
     var isAdmin = false;
 
-    if (this.userName == "admin") {
+    if (this.userName == "User1@coldpeer.cold-chain.com") {
       isAdmin = true;
     }
 
@@ -37,8 +37,8 @@ class ColdFabric {
   }
 
   queryAllArduinoData() {
-    this.connection.setAdminSigningIdentity(private_key,sign_cert,"ColdpeerMSP");
-    var tx_id = this.connection.newTransactionID(true);
+    // this.connection.setAdminSigningIdentity(private_key,sign_cert,"ColdpeerMSP");
+    var tx_id = this.connection.newTransactionID();
     var requestData = {
       chaincodeId: 'cc-cold',
       fcn: 'queryArduinoData',
@@ -49,8 +49,8 @@ class ColdFabric {
   }
 
   addArduinoData(arduino) {
-    this.connection.setAdminSigningIdentity(process.env.HLF_PRIVATE_KEY,process.env.HLF_SIGN_CERT,"ColdpeerMSP");
-    var tx_id = this.connection.newTransactionID(true);
+    // this.connection.setAdminSigningIdentity(process.env.HLF_PRIVATE_KEY,process.env.HLF_SIGN_CERT,"ColdpeerMSP");
+    var tx_id = this.connection.newTransactionID();
     var requestData = {
       chaincodeId: 'cc-cold',
       fcn: 'createArduinoData',
