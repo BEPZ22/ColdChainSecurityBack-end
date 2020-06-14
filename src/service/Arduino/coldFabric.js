@@ -8,7 +8,7 @@ class ColdFabric {
     this.currentUser;
     this.issuer;
     this.userName = "User1@coldpeer.cold-chain.com";
-    this.connection = new fabricClient();
+    this.connection = fabricClient;
   }
 
   // constructor(){
