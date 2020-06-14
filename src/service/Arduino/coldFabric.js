@@ -23,7 +23,8 @@ class ColdFabric {
     }
 
     // return this.connection.initCredentialStores().then(() => {
-      return this.connection.getUserContext(this.userName, true).then(() => {
+    return this.connection.setAdminSigningIdentity(private_key,sign_cert,"ColdpeerMSP").then(() => {
+      return this.connection.getUserContext(this.userName, true)
     }).then((user) => {
       this.issuer = user;
       if (isAdmin) {
