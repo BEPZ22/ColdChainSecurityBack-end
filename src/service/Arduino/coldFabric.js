@@ -22,8 +22,8 @@ class ColdFabric {
       isAdmin = true;
     }
 
-    return this.connection.initCredentialStores().then(() => {
-      return this.connection.getUserContext(this.userName, true)
+    // return this.connection.initCredentialStores().then(() => {
+      return this.connection.getUserContext(this.userName, true).then(() => {
     }).then((user) => {
       this.issuer = user;
       if (isAdmin) {
