@@ -35,7 +35,7 @@
 
 	"organizations" :{
         "Coldpeer" : {
-            "mspid" : "ColdpeerMSP",
+            "mspid" : "Coldpeer.cold-chainMSP",
             "peers" : [ "coldpeer.cold-chain.com" ],
             "certificateAuthorities": "ca.coldpeer.cold-chain.com-cert.pem",
             "adminPrivateKey" : {
