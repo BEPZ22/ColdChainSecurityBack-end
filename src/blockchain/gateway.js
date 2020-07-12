@@ -105,7 +105,8 @@
 async function setupGateway() {
      
     // 2.1 load the connection profile into a JS object
-    let connectionProfile = yaml.safeLoad(fs.readFileSync(CONNECTION_PROFILE_PATH, 'utf8'));
+    let connectionProfile = path.join(__dirname, CONNECTION_PROFILE_PATH)
+    // let connectionProfile = yaml.safeLoad(fs.readFileSync(CONNECTION_PROFILE_PATH, 'utf8'));
 
     // 2.2 Need to setup the user credentials from wallet
     const wallet = new FileSystemWallet(FILESYSTEM_WALLET_PATH)
