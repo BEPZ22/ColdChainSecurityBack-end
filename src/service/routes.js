@@ -1,4 +1,3 @@
-const arduino = require("./Arduino/arduinoData");
 const user = require("./User/userData");
 const truck = require("./Truck/truckData");
 const warehouse = require("./Warehouse/warehouseData");
@@ -14,8 +13,8 @@ module.exports = {
     assignRoutes : function(app){
         
         //Arduino
-        app.get('/arduino', arduino.getData);
-        app.get('/arduino/addData/:Id/:Lg/:Lt/:Tp/:Dt/:Un/:Wh/:Co/:Ua', arduino.addData);
+        // app.get('/arduino', arduino.getData);
+        // app.get('/arduino/addData/:Id/:Lg/:Lt/:Tp/:Dt/:Un/:Wh/:Co/:Ua', arduino.addData);
         app.post('/hlf', blockchain.submitTxnContract);
         app.get('/hlf', blockchain.queryContract);
         
