@@ -1,1 +1,1 @@
-web: node ./src/blockchain/wallet.js list
+web: node src/blockchain/wallet.js list

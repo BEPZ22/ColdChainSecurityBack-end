@@ -42,63 +42,63 @@
         return contract
     }
     module.exports = {
- /**
-  * Queries the chaincode
-  * @param {object} contract 
-  */
- queryContract : async function (req, res){
-     
-     try{
-         // Query the chaincode
-         let contract = await main()
-         let response = await contract.evaluateTransaction('queryArduinoData', '{"selector":{"docType":"arduino"}}')
-         res.status(200).send(response.toString())
-     } catch(e){
-         console.log(e)
-     }
- },
+        /**
+         * Queries the chaincode
+         * @param {object} contract 
+         */
+        queryContract : async function (req, res){
+            
+            try{
+                // Query the chaincode
+                let contract = await main()
+                let response = await contract.evaluateTransaction('queryArduinoData', '{"selector":{"docType":"arduino"}}')
+                res.status(200).send(response.toString())
+            } catch(e){
+                console.log(e)
+            }
+        },
+        
+        /**
+         * Submit the transaction
+         * @param {object} contract 
+         */
+        submitTxnContract: async function (req, res){
+            var arduino = {
+                id : req.body.id ,
+                lg : req.body.lg,
+                lt : req.body.lt,
+                tp : req.body.tp, 
+                dt : req.body.dt,
+                un : req.body.un,
+                wh : req.body.wh,
+                co : req.body.co,
+                ua : req.body.ua
+            }
+            try{
+                // Submit the transaction
+                let contract = await main()
+                let response = await contract.submitTransaction('createArduinoData', 
+                                                                arduino.id,
+                                                                arduino.un,
+                                                                arduino.wh,
+                                                                arduino.lg,
+                                                                arduino.lt,
+                                                                arduino.tp,
+                                                                arduino.dt, 
+                                                                arduino.co, 
+                                                                arduino.ua)
+                res.status(200).send(response.toString())
+                console.log("Submit Response=",response.toString())
+            } catch(e){
+                // fabric-network.TimeoutError
+                console.log(e)
+            }
+        },
  
- /**
-  * Submit the transaction
-  * @param {object} contract 
-  */
- submitTxnContract: async function (req, res){
-    var arduino = {
-        id : req.body.id ,
-        lg : req.body.lg,
-        lt : req.body.lt,
-        tp : req.body.tp, 
-        dt : req.body.dt,
-        un : req.body.un,
-        wh : req.body.wh,
-        co : req.body.co,
-        ua : req.body.ua
-    }
-     try{
-         // Submit the transaction
-         let contract = await main()
-         let response = await contract.submitTransaction('createArduinoData', 
-                                                         arduino.id,
-                                                         arduino.un,
-                                                         arduino.wh,
-                                                         arduino.lg,
-                                                         arduino.lt,
-                                                         arduino.tp,
-                                                         arduino.dt, 
-                                                         arduino.co, 
-                                                         arduino.ua)
-         res.status(200).send(response.toString())
-         console.log("Submit Response=",response.toString())
-     } catch(e){
-         // fabric-network.TimeoutError
-         console.log(e)
-     }
- },
- 
- /**
-  * Function for setting up the gateway
-  * It does not actually connect to any peer/orderer
-  */
+    /**
+     * Function for setting up the gateway
+     * It does not actually connect to any peer/orderer
+     */
 
  
 }
@@ -127,27 +127,3 @@ async function setupGateway() {
     await gateway.connect(connectionProfile, connectionOptions)
     // console.log( gateway)
 }
- /**
-  * Creates the transaction & uses the submit function
-  * Solution to exercise
-  * To execute this add the line in main() => submitTxnTransaction(contract)
-  * @param {object} contract 
-  */
- // async function submitTxnTransaction(contract) {
- //     // Provide the function name
- //     let txn = contract.createTransaction('transfer')
-     
- //     // Get the name of the transaction
- //     console.log(txn.getName())
- 
- //     // Get the txn ID
- //     console.log(txn.getTransactionID())
- 
- //     // Submit the transaction
- //     try{
- //         let response = await txn.submit('john', 'sam', '2')
- //         console.log("transaction.submit()=", response.toString())
- //     } catch(e) {
- //         console.log(e)
- //     }
- // }
