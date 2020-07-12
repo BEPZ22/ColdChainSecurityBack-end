@@ -4,6 +4,8 @@
   "description": "Backend de tesis de grado Blockchain",
   "main": "index.js",
   "scripts": {
+    "start": "node server.js",
+    "poststart": "node ./src/blockchain/wallet.js add coldpeer.cold-chain Admin",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
