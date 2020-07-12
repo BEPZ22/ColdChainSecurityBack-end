@@ -16,8 +16,8 @@ module.exports = {
         //Arduino
         app.get('/arduino', arduino.getData);
         app.get('/arduino/addData/:Id/:Lg/:Lt/:Tp/:Dt/:Un/:Wh/:Co/:Ua', arduino.addData);
-        app.post('/hlf', arduino.addDataHLF);
-        app.get('/hlf', arduino.getAllHLF);
+        app.post('/hlf', blockchain.submitTxnContract);
+        app.get('/hlf', blockchain.queryContract);
         
         //Comercio
         app.get('/comercio/:rol/:comercio', auth.verifyToken, commerce.getAllCommerce);

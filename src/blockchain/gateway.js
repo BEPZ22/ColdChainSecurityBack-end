@@ -24,95 +24,107 @@
  
  // 1. Create an instance of the gatway
  const gateway = new Gateway();
- 
  // Sets up the gateway | executes the invoke & query
- main()
  
  /**
   * Executes the functions for query & invoke
   */
- async function main() {
-     
-     // 2. Setup the gateway object
-     await setupGateway()
- 
-     // 3. Get the network
-     let network = await gateway.getNetwork(NETWORK_NAME)
-     // console.log(network)
- 
+    async function main() {
+        
+        // 2. Setup the gateway object
+        await setupGateway()
+        // 3. Get the network
+        let network = await gateway.getNetwork(NETWORK_NAME)
+        // console.log(network)
         // 5. Get the contract
-     const contract = await network.getContract(CONTRACT_ID);
-     // console.log(contract)
- 
-     // 6. Query the chaincode
-     await queryContract(contract)
- 
-     // 7. Execute the transaction
-     //await submitTxnContract(contract)
-     // Must give delay or use await here otherwise Error=MVCC_READ_CONFLICT
-     // await submitTxnContract(contract)
- 
- }
- 
+        let contract = await network.getContract(CONTRACT_ID);
+
+        return contract;
+    }
+    module.exports = {
  /**
   * Queries the chaincode
   * @param {object} contract 
   */
- async function queryContract(contract){
+ queryContract : async function (req, res){
+     let contract = await main();
      try{
          // Query the chaincode
          let response = await contract.evaluateTransaction('queryArduinoData', '{"selector":{"docType":"arduino"}}')
-         console.log(`Query Response=${response.toString()}`)
+         res.status(200).send(response.toString())
      } catch(e){
          console.log(e)
      }
- }
+ },
  
  /**
   * Submit the transaction
   * @param {object} contract 
   */
- async function submitTxnContract(contract){
+ submitTxnContract: async function (req, res){
+    var arduino = {
+        id : req.body.id ,
+        lg : req.body.lg,
+        lt : req.body.lt,
+        tp : req.body.tp, 
+        dt : req.body.dt,
+        un : req.body.un,
+        wh : req.body.wh,
+        co : req.body.co,
+        ua : req.body.ua
+    }
+    let contract = await main();
      try{
          // Submit the transaction
-         let response = await contract.submitTransaction('createArduinoData', "6","ZCV182IH","ColdChainSecurity2","12.4877","-60.2315","25","7/4/2020 10:01", "Locatel", "YHLQMDLG")
+         let response = await contract.submitTransaction('createArduinoData', 
+                                                         arduino.id,
+                                                         arduino.un,
+                                                         arduino.wh,
+                                                         arduino.lg,
+                                                         arduino.lt,
+                                                         arduino.tp,
+                                                         arduino.dt, 
+                                                         arduino.co, 
+                                                         arduino.ua)
+         res.status(200).send(response.toString())
          console.log("Submit Response=",response.toString())
      } catch(e){
          // fabric-network.TimeoutError
          console.log(e)
      }
- }
+ },
  
  /**
   * Function for setting up the gateway
   * It does not actually connect to any peer/orderer
   */
- async function setupGateway() {
+
+ 
+}
+
+async function setupGateway() {
      
-     // 2.1 load the connection profile into a JS object
-     let connectionProfile = yaml.safeLoad(fs.readFileSync(CONNECTION_PROFILE_PATH, 'utf8'));
- 
-     // 2.2 Need to setup the user credentials from wallet
-     const wallet = new FileSystemWallet(FILESYSTEM_WALLET_PATH)
- 
-     // 2.3 Set up the connection options
-     let connectionOptions = {
-         identity: USER_ID,
-         wallet: wallet,
-         discovery: { enabled: false, asLocalhost: true }
-         /*** Uncomment lines below to disable commit listener on submit ****/
-         // , eventHandlerOptions: {
-         //     strategy: null
-         // } 
-     }
- 
-     // 2.4 Connect gateway to the network
-     await gateway.connect(connectionProfile, connectionOptions)
-     // console.log( gateway)
- }
- 
- 
- 
+    // 2.1 load the connection profile into a JS object
+    let connectionProfile = yaml.safeLoad(fs.readFileSync(CONNECTION_PROFILE_PATH, 'utf8'));
+
+    // 2.2 Need to setup the user credentials from wallet
+    const wallet = new FileSystemWallet(FILESYSTEM_WALLET_PATH)
+
+    // 2.3 Set up the connection options
+    let connectionOptions = {
+        identity: USER_ID,
+        wallet: wallet,
+        discovery: { enabled: false, asLocalhost: true }
+        /*** Uncomment lines below to disable commit listener on submit ****/
+        // , eventHandlerOptions: {
+        //     strategy: null
+        // } 
+    }
+
+    // 2.4 Connect gateway to the network
+    await gateway.connect(connectionProfile, connectionOptions)
+    // console.log( gateway)
+}
  /**
   * Creates the transaction & uses the submit function
   * Solution to exercise
