@@ -13,7 +13,7 @@
  // Constants for profile
  const CONNECTION_PROFILE_PATH = './ConnectionProfile.yaml'
  // Path to the wallet
- const FILESYSTEM_WALLET_PATH = './user-wallet'
+ const FILESYSTEM_WALLET_PATH = '../../user-wallet'
  // Identity context used
  const USER_ID = 'Admin@coldpeer.cold-chain.com'
  // Channel name
