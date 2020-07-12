@@ -6,6 +6,7 @@
  const fs = require('fs');
  // Used for parsing the connection profile YAML file
  const yaml = require('js-yaml');
+ const path = require('path');
  // Import gateway class
  const { Gateway, FileSystemWallet, DefaultEventHandlerStrategies, Transaction  } = require('fabric-network');
  
