@@ -4,7 +4,7 @@
   "description": "Backend de tesis de grado Blockchain",
   "main": "index.js",
   "scripts": {
-    "start": "NODE_ENV=production node wallet.js add coldpeer.cold-chain Admin & NODE_ENV=production node server.js & wait",
+    "start": "NODE_ENV=production node wallet.js add coldpeer.cold-chain Admin & node wallet.js list & NODE_ENV=production node server.js & wait",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
