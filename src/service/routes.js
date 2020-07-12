@@ -7,6 +7,7 @@ const commerce = require("./Commerce/commerceData");
 const eslabon = require("./StaticUnit/staticUnit");
 const otro = require("./Otros/otros");
 const auth = require("../service/Login/Middleware/authentification")
+const blockchain = require("../blockchain/gateway")
 
 module.exports = {
     
