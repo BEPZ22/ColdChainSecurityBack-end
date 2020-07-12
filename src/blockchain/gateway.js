@@ -20,7 +20,6 @@
  // Chaincode
  const CONTRACT_ID = "cc-cold"
  
- const contract
  
  // 1. Create an instance of the gatway
  const gateway = new Gateway();
@@ -37,7 +36,9 @@
         let network = await gateway.getNetwork(NETWORK_NAME)
         // console.log(network)
         // 5. Get the contract
-        contract = await network.getContract(CONTRACT_ID);
+        let contract = await network.getContract(CONTRACT_ID);
+
+        return contract
     }
     module.exports = {
  /**
@@ -45,8 +46,10 @@
   * @param {object} contract 
   */
  queryContract : async function (req, res){
+     
      try{
          // Query the chaincode
+         let contract = await main()
          let response = await contract.evaluateTransaction('queryArduinoData', '{"selector":{"docType":"arduino"}}')
          res.status(200).send(response.toString())
      } catch(e){
@@ -72,6 +75,7 @@
     }
      try{
          // Submit the transaction
+         let contract = await main()
          let response = await contract.submitTransaction('createArduinoData', 
                                                          arduino.id,
                                                          arduino.un,
