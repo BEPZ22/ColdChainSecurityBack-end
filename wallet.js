@@ -41,7 +41,7 @@ if(action == 'list'){
     } else {
         exportIdentity(process.argv[3], process.argv[4])
     }
-} 
+}  
 
 /**
  * @param   string  Organization = acme or budget
