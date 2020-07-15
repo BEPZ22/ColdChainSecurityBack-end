@@ -7,7 +7,7 @@ const commerce = require("./Commerce/commerceData");
 const eslabon = require("./StaticUnit/staticUnit");
 const otro = require("./Otros/otros");
 const auth = require("../service/Login/Middleware/authentification")
-const blockchain = require("../blockchain/gateway")
+
 
 module.exports = {
     
@@ -16,8 +16,6 @@ module.exports = {
         //Arduino
         // app.get('/arduino', arduino.getData);
         // app.get('/arduino/addData/:Id/:Lg/:Lt/:Tp/:Dt/:Un/:Wh/:Co/:Ua', arduino.addData);
-        app.post('/hlf', blockchain.submitTxnContract);
-        app.get('/hlf', blockchain.queryContract);
         
         //Comercio
         app.get('/comercio/:rol/:comercio', auth.verifyToken, commerce.getAllCommerce);
