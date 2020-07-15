@@ -71,3 +71,53 @@ app.get('/hlf', async function (req, res) {
       process.exit(1);
   }
 });
+
+app.post('/hlf', async function (req, res) {
+  try {
+      // Create a new gateway for connecting to our peer node.
+      const gateway = new Gateway();
+
+      let connectionProfile = path.join(__dirname, CONNECTION_PROFILE_PATH)
+      const wallet = new FileSystemWallet(FILESYSTEM_WALLET_PATH);
+
+      await gateway.connect(connectionProfile, {
+          identity: USER_ID,
+          wallet: wallet,
+          discovery: { enabled: false, asLocalhost: true }
+      });
+
+      // Get the network (channel) our contract is deployed to.
+      const network = await gateway.getNetwork(NETWORK_NAME);
+
+      // Get the contract from the network.
+      const contract = network.getContract(CONTRACT_ID);
+
+      var arduino = {
+          id : req.body.id ,
+          lg : req.body.lg,
+          lt : req.body.lt,
+          tp : req.body.tp, 
+          dt : req.body.dt,
+          un : req.body.un,
+          wh : req.body.wh,
+          co : req.body.co,
+          ua : req.body.ua
+      }
+      let response = await contract.submitTransaction('createArduinoData', 
+                                                      arduino.id,
+                                                      arduino.un,
+                                                      arduino.wh,
+                                                      arduino.lg,
+                                                      arduino.lt,
+                                                      arduino.tp,
+                                                      arduino.dt, 
+                                                      arduino.co, 
+                                                      arduino.ua)
+      res.status(200).send(response.toString())
+      console.log("Submit Response=",response.toString())
+  } catch (error) {
+      console.error(`Failed to evaluate transaction: ${error}`);
+      res.status(500).json({error: error});
+      process.exit(1);
+  }
+});
