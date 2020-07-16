@@ -127,7 +127,7 @@ app.get('/hlf/:empresa', async function (req, res) {
         const contract = network.getContract(CONTRACT_ID);
   
         // Evaluate the specified transaction.
-        const result = await contract.evaluateTransaction('getHistoryForArduinoDataByID', `${id}`);
+        const result = await contract.evaluateTransaction('getHistoryForArduinoDataByID', id);
         console.log(`Transaction has been evaluated, result is: ${result.toString()}`);
         res.status(200).json({response: result.toString()});
   
