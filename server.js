@@ -72,6 +72,72 @@ app.get('/hlf', async function (req, res) {
   }
 });
 
+app.get('/hlf/:empresa', async function (req, res) {
+    const empresa = req.params['empresa'];
+    try {
+        // Create a new gateway for connecting to our peer node.
+        const gateway = new Gateway();
+  
+        let connectionProfile = path.join(__dirname, CONNECTION_PROFILE_PATH)
+        const wallet = new FileSystemWallet(FILESYSTEM_WALLET_PATH);
+  
+        await gateway.connect(connectionProfile, {
+            identity: USER_ID,
+            wallet: wallet,
+            discovery: { enabled: false, asLocalhost: true }
+        });
+  
+        // Get the network (channel) our contract is deployed to.
+        const network = await gateway.getNetwork(NETWORK_NAME);
+  
+        // Get the contract from the network.
+        const contract = network.getContract(CONTRACT_ID);
+  
+        // Evaluate the specified transaction.
+        const result = await contract.evaluateTransaction('queryArduinoData', `{"selector":{"docType":"arduino","comercio": ${empresa}}}`);
+        console.log(`Transaction has been evaluated, result is: ${result.toString()}`);
+        res.status(200).json({response: result.toString()});
+  
+    } catch (error) {
+        console.error(`Failed to evaluate transaction: ${error}`);
+        res.status(500).json({error: error});
+        process.exit(1);
+    }
+  });
+
+  app.get('/hlfHistory/:id', async function (req, res) {
+    const id = req.params['id'];
+    try {
+        // Create a new gateway for connecting to our peer node.
+        const gateway = new Gateway();
+  
+        let connectionProfile = path.join(__dirname, CONNECTION_PROFILE_PATH)
+        const wallet = new FileSystemWallet(FILESYSTEM_WALLET_PATH);
+  
+        await gateway.connect(connectionProfile, {
+            identity: USER_ID,
+            wallet: wallet,
+            discovery: { enabled: false, asLocalhost: true }
+        });
+  
+        // Get the network (channel) our contract is deployed to.
+        const network = await gateway.getNetwork(NETWORK_NAME);
+  
+        // Get the contract from the network.
+        const contract = network.getContract(CONTRACT_ID);
+  
+        // Evaluate the specified transaction.
+        const result = await contract.evaluateTransaction('getHistoryForArduinoDataByID', `${id}`);
+        console.log(`Transaction has been evaluated, result is: ${result.toString()}`);
+        res.status(200).json({response: result.toString()});
+  
+    } catch (error) {
+        console.error(`Failed to evaluate transaction: ${error}`);
+        res.status(500).json({error: error});
+        process.exit(1);
+    }
+  });
+
 app.post('/hlf', async function (req, res) {
   try {
       // Create a new gateway for connecting to our peer node.
