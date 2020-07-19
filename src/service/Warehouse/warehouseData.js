@@ -14,6 +14,7 @@ const _getAllWarehouse = "SELECT * FROM get_almacen_informacion($1 , $2);";
 const _updateWarehouse = "SELECT update_warehouse( $1 , $2 , $3 , $4 , $5 , $6, $7, $8 , $9, $10, $11);";
 const _deleteWarehouse = "SELECT delete_warehouse( $1 );";
 const _getWareHouseName = "SELECT * FROM get_all_warehouse_name($1 , $2);"
+const _getWareHouseNameByCommerceName = "SELECT * FROM get_almacen_by_comercio( $1 );"
 
 module.exports = {
 
@@ -45,6 +46,17 @@ module.exports = {
         const id_comercio = req.params['comercio'];
         try {
           const response = await pool.query(_getWareHouseName,[rol,id_comercio]);
+          res.status(200).send(response.rows);
+        } catch (error) {
+          res.status(404).send(error);
+        }
+  
+      },
+
+      getWarehouseNameByCommerceName : async function(req, res){
+        const comercio = req.params['comercio'];
+        try {
+          const response = await pool.query(_getWareHouseNameByCommerceName,[comercio]);
           res.status(200).send(response.rows);
         } catch (error) {
           res.status(404).send(error);

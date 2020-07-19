@@ -47,6 +47,7 @@ module.exports = {
         app.post('/almacen', auth.verifyToken, warehouse.createWarehouse);
         app.put('/almacen', auth.verifyToken, warehouse.updateWarehouse); 
         app.delete('/almacen', auth.verifyToken, warehouse.deleteWarehouse);
+        app.get('/almacenNombre/:comercio', auth.verifyToken, warehouse.getWarehouseNameByCommerceName);
         
 
         //Unidad Fija / Eslabon Estatico
