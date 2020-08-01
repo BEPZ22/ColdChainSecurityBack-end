@@ -171,9 +171,9 @@ app.get('/hlf/:empresa', async function (req, res) {
             if (min > max){
                 max = min
             }
-
+ 
         });
-        console.log(`Transaction has been evaluated, result data is: ${max}`);
+        console.log(`Transaction has been evaluated, result data is: ${ max }`);
         res.status(200).json({data});
   
     } catch (error) {
