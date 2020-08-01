@@ -197,7 +197,7 @@ app.get('/hlf/:empresa', async function (req, res) {
         // result.forEach(value => {
         //     console.log(value.key)
         //   })
-        console.log(`Transaction has been evaluated, result without [] is: ${result.Key}`);
+        console.log(`Transaction has been evaluated, result without [] is: ${result}`);
         res.status(200).send({response: result.toString()});
   
     } catch (error) {
