@@ -218,7 +218,7 @@ app.get('/hlf/:empresa', async function (req, res) {
             }
  
         });
-        console.log(`Transaction has been evaluated, result data is: ${ max }`);
+        // console.log(`Transaction has been evaluated, result data is: ${ max }`);
         res.status(200).json({tempMax : max});
   
     } catch (error) {
@@ -254,7 +254,7 @@ app.get('/hlfUnidad/Min/:unidad', async function (req, res) {
         // Evaluate the specified transaction.
         const result = await contract.evaluateTransaction('queryArduinoData', '{"selector":{"docType":"arduino","unidad":"' + unidad.toString() + '"}}');
         var data = JSON.parse(result.toString())
-        var min = Number('0');
+        var min = Number('100');
         data.forEach(element => {
             var max = Number(element.Record.temperatura.toString())
             if (min > max){
@@ -262,7 +262,7 @@ app.get('/hlfUnidad/Min/:unidad', async function (req, res) {
             }
  
         });
-        console.log(`Transaction has been evaluated, result data is: ${ max }`);
+        // console.log(`Transaction has been evaluated, result data is: ${ max }`);
         res.status(200).json({tempMin : min});
   
     } catch (error) {
@@ -336,7 +336,7 @@ app.get('/hlfUnidad/Min/:unidad', async function (req, res) {
         const result = await contract.evaluateTransaction('queryArduinoData', '{"selector":{"docType":"arduino","unidadAlmacen":"' + unidad.toString() + '"}}');
 
         var data = JSON.parse(result.toString())
-        var max = Number('0');
+        var max = Number('-100');
         data.forEach(element => {
             var min = Number(element.Record.temperatura.toString())
             if (min > max){
@@ -380,7 +380,7 @@ app.get('/hlfUnidadAlmacen/Min/:unidad', async function (req, res) {
         const result = await contract.evaluateTransaction('queryArduinoData', '{"selector":{"docType":"arduino","unidadAlmacen":"' + unidad.toString() + '"}}');
 
         var data = JSON.parse(result.toString())
-        var min = Number('0');
+        var min = Number('100');
         data.forEach(element => {
             var max = Number(element.Record.temperatura.toString())
             if (min > max){
