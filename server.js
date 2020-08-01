@@ -165,11 +165,15 @@ app.get('/hlf/:empresa', async function (req, res) {
         // Evaluate the specified transaction.
         const result = await contract.evaluateTransaction('queryArduinoData', '{"selector":{"docType":"arduino","unidad":"' + unidad.toString() + '"}}');
         var data = JSON.parse(result.toString())
-        
+        var max = Number('0');
         data.forEach(element => {
-            console.log( JSON.stringify(element.Record.temperatura))
+            var min = Number(element.Record.temperatura.toString())
+            if (min > max){
+                max = min
+            }
+
         });
-        // console.log(`Transaction has been evaluated, result data is: ${info[0].Record}`);
+        console.log(`Transaction has been evaluated, result data is: ${max}`);
         res.status(200).json({data});
   
     } catch (error) {
