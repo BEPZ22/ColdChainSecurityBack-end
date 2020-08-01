@@ -165,7 +165,7 @@ app.get('/hlf/:empresa', async function (req, res) {
         // Evaluate the specified transaction.
         const result = await contract.evaluateTransaction('queryArduinoData', '{"selector":{"docType":"arduino","unidad":"' + unidad.toString() + '"}}');
         var data = JSON.parse(result.toString())
-        console.log(`Transaction has been evaluated, result data is: ${data[0]["key"].toString()}`);
+        console.log(`Transaction has been evaluated, result data is: ${data[0]}`);
         res.status(200).json({data});
   
     } catch (error) {
