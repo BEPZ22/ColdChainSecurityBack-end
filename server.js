@@ -147,6 +147,132 @@ app.get('/hlf/:empresa', async function (req, res) {
     }
   });
 
+// Obtener informacion de la red filtrada por almacen
+
+    app.get('/hlfAlmacen/:almacen', async function (req, res) {
+        const almacen = req.params['almacen'];
+        try {
+            // Create a new gateway for connecting to our peer node.
+            const gateway = new Gateway();
+    
+            let connectionProfile = path.join(__dirname, CONNECTION_PROFILE_PATH)
+            const wallet = new FileSystemWallet(FILESYSTEM_WALLET_PATH);
+    
+            await gateway.connect(connectionProfile, {
+                identity: USER_ID,
+                wallet: wallet,
+                discovery: { enabled: false, asLocalhost: true }
+            });
+    
+            // Get the network (channel) our contract is deployed to.
+            const network = await gateway.getNetwork(NETWORK_NAME);
+    
+            // Get the contract from the network.
+            const contract = network.getContract(CONTRACT_ID);
+    
+            // Evaluate the specified transaction.
+            const result = await contract.evaluateTransaction('queryArduinoData', '{"selector":{"docType":"arduino","almacen":"' + almacen.toString() + '"}}');
+            var data = JSON.parse(result.toString())
+
+            // console.log(`Transaction has been evaluated, result data is: ${ max }`);
+            res.status(200).json({data});
+    
+        } catch (error) {
+            console.error(`Failed to evaluate transaction: ${error}`);
+            res.status(500).json({error: error});
+            process.exit(1);
+        }
+    });
+
+// Obtener la temperatura Maxima registrada en un almacen
+
+app.get('/hlfAlmacen/Max/:almacen', async function (req, res) {
+    const almacen = req.params['almacen'];
+    try {
+        // Create a new gateway for connecting to our peer node.
+        const gateway = new Gateway();
+
+        let connectionProfile = path.join(__dirname, CONNECTION_PROFILE_PATH)
+        const wallet = new FileSystemWallet(FILESYSTEM_WALLET_PATH);
+
+        await gateway.connect(connectionProfile, {
+            identity: USER_ID,
+            wallet: wallet,
+            discovery: { enabled: false, asLocalhost: true }
+        });
+
+        // Get the network (channel) our contract is deployed to.
+        const network = await gateway.getNetwork(NETWORK_NAME);
+
+        // Get the contract from the network.
+        const contract = network.getContract(CONTRACT_ID);
+
+        // Evaluate the specified transaction.
+        const result = await contract.evaluateTransaction('queryArduinoData', '{"selector":{"docType":"arduino","almacen":"' + almacen.toString() + '"}}');
+        var data = JSON.parse(result.toString())
+        var max = Number('-100');
+        data.forEach(element => {
+            var min = Number(element.Record.temperatura.toString())
+            if (min > max){
+                max = min
+            }
+ 
+        });
+        // console.log(`Transaction has been evaluated, result data is: ${ max }`);
+        res.status(200).json({tempMax : max});
+
+    } catch (error) {
+        console.error(`Failed to evaluate transaction: ${error}`);
+        res.status(500).json({error: error});
+        process.exit(1);
+    }
+});
+
+
+// Obtener la temperatura Minima registrada en un almacen
+
+app.get('/hlfAlmacen/Min/:almacen', async function (req, res) {
+    const almacen = req.params['almacen'];
+    try {
+        // Create a new gateway for connecting to our peer node.
+        const gateway = new Gateway();
+
+        let connectionProfile = path.join(__dirname, CONNECTION_PROFILE_PATH)
+        const wallet = new FileSystemWallet(FILESYSTEM_WALLET_PATH);
+
+        await gateway.connect(connectionProfile, {
+            identity: USER_ID,
+            wallet: wallet,
+            discovery: { enabled: false, asLocalhost: true }
+        });
+
+        // Get the network (channel) our contract is deployed to.
+        const network = await gateway.getNetwork(NETWORK_NAME);
+
+        // Get the contract from the network.
+        const contract = network.getContract(CONTRACT_ID);
+
+        // Evaluate the specified transaction.
+        const result = await contract.evaluateTransaction('queryArduinoData', '{"selector":{"docType":"arduino","almacen":"' + almacen.toString() + '"}}');
+        var data = JSON.parse(result.toString())
+        var min = Number('100');
+        data.forEach(element => {
+            var max = Number(element.Record.temperatura.toString())
+            if (min > max){
+                min = max
+            }
+ 
+        });
+        // console.log(`Transaction has been evaluated, result data is: ${ max }`);
+        res.status(200).json({tempMin : min});
+
+    } catch (error) {
+        console.error(`Failed to evaluate transaction: ${error}`);
+        res.status(500).json({error: error});
+        process.exit(1);
+    }
+});
+
 // Obtener informacion de la red filtrada por las unidades de transporte 
 
   app.get('/hlfUnidad/:unidad', async function (req, res) {
@@ -210,7 +336,7 @@ app.get('/hlf/:empresa', async function (req, res) {
         // Evaluate the specified transaction.
         const result = await contract.evaluateTransaction('queryArduinoData', '{"selector":{"docType":"arduino","unidad":"' + unidad.toString() + '"}}');
         var data = JSON.parse(result.toString())
-        var max = Number('0');
+        var max = Number('-100');
         data.forEach(element => {
             var min = Number(element.Record.temperatura.toString())
             if (min > max){
