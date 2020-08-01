@@ -138,7 +138,7 @@ app.get('/hlf/:empresa', async function (req, res) {
     }
   });
 
-  app.get('/hlf/unidad/:unidad', async function (req, res) {
+  app.get('/hlfUnidad/:unidad', async function (req, res) {
     const unidad = req.params['unidad'];
     try {
         // Create a new gateway for connecting to our peer node.
@@ -160,7 +160,7 @@ app.get('/hlf/:empresa', async function (req, res) {
         const contract = network.getContract(CONTRACT_ID);
   
         // Evaluate the specified transaction.
-        const result = await contract.evaluateTransaction('queryArduinoData', '{"selector":{"docType":"arduino","unidad":' + '"' +unidad.toString() + '"' + '}}');
+        const result = await contract.evaluateTransaction('queryArduinoData', '{"selector":{"docType":"arduino","unidad":"' + unidad.toString() + '"}}');
         console.log(`Transaction has been evaluated, result is: ${result.toString()}`);
         res.status(200).json({response: result.toString()});
   
