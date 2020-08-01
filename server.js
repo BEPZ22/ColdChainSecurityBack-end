@@ -62,8 +62,9 @@ app.get('/hlf', async function (req, res) {
 
       // Evaluate the specified transaction.
       const result = await contract.evaluateTransaction('queryArduinoData', '{"selector":{"docType":"arduino"}}');
-      console.log(`Transaction has been evaluated, result is: ${result.toString()}`);
-      res.status(200).json({response: result.toString()});
+      var data = JSON.parse(result.toString())
+      // console.log(`Transaction has been evaluated, result data is: ${data}`);
+      res.status(200).json({data});
 
   } catch (error) {
       console.error(`Failed to evaluate transaction: ${error}`);
@@ -95,8 +96,9 @@ app.get('/hlf/:empresa', async function (req, res) {
   
         // Evaluate the specified transaction.
         const result = await contract.evaluateTransaction('queryArduinoData', '{"selector":{"docType":"arduino","comercio":"' + empresa.toString() + '"}}');
-        console.log(`Transaction has been evaluated, result is: ${result.toString()}`);
-        res.status(200).json({response: result.toString()});
+        var data = JSON.parse(result.toString())
+        // console.log(`Transaction has been evaluated, result data is: ${data}`);
+        res.status(200).json({data});
   
     } catch (error) {
         console.error(`Failed to evaluate transaction: ${error}`);
@@ -128,8 +130,9 @@ app.get('/hlf/:empresa', async function (req, res) {
   
         // Evaluate the specified transaction.
         const result = await contract.evaluateTransaction('getHistoryForArduinoDataByID', id);
-        console.log(`Transaction has been evaluated, result is: ${result.toString()}`);
-        res.status(200).json({response: result.toString()});
+        var data = JSON.parse(result.toString())
+        // console.log(`Transaction has been evaluated, result data is: ${data}`);
+        res.status(200).json({data});
   
     } catch (error) {
         console.error(`Failed to evaluate transaction: ${error}`);
@@ -161,8 +164,9 @@ app.get('/hlf/:empresa', async function (req, res) {
   
         // Evaluate the specified transaction.
         const result = await contract.evaluateTransaction('queryArduinoData', '{"selector":{"docType":"arduino","unidad":"' + unidad.toString() + '"}}');
-        console.log(`Transaction has been evaluated, result is: ${result.toString()}`);
-        res.status(200).json({response: result.toString()});
+        var data = JSON.parse(result.toString())
+        // console.log(`Transaction has been evaluated, result data is: ${data}`);
+        res.status(200).json({data});
   
     } catch (error) {
         console.error(`Failed to evaluate transaction: ${error}`);
@@ -196,10 +200,7 @@ app.get('/hlf/:empresa', async function (req, res) {
         const result = await contract.evaluateTransaction('queryArduinoData', '{"selector":{"docType":"arduino","unidadAlmacen":"' + unidad.toString() + '"}}');
 
         var data = JSON.parse(result.toString())
-        data.forEach(value => {
-            console.log(value.key)
-          })
-        // console.log(`Transaction has been evaluated, result data is: ${data[0].key}`);
+        // console.log(`Transaction has been evaluated, result data is: ${data}`);
         res.status(200).json({data});
   
     } catch (error) {
