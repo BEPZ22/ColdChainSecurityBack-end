@@ -194,7 +194,7 @@ app.get('/hlf/:empresa', async function (req, res) {
   
         // Evaluate the specified transaction.
         const result = await contract.evaluateTransaction('queryArduinoData', '{"selector":{"docType":"arduino","unidadAlmacen":"' + unidad.toString() + '"}}');
-        console.log(`Transaction has been evaluated, result is key: ${result["Key"].toString()}`);
+        console.log(`Transaction has been evaluated, result is key: ${result["Key"].toString()} \n`);
         console.log(`Transaction has been evaluated, result is 0, record: ${result[0]["Record"]["temperatura"].toString()}`);
         res.status(200).send({response: result.toString()});
   
