@@ -110,7 +110,7 @@ app.get('/hlf/:empresa', async function (req, res) {
         process.exit(1);
     }
   });
-
+ 
 // Obtener informacion especifica acerca de un elemento que persiste en la red de la Red segun el ID que se maneje
 
   app.get('/hlfHistory/:id', async function (req, res) {
