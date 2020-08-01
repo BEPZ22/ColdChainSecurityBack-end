@@ -158,7 +158,7 @@ app.get('/hlf/:empresa', async function (req, res) {
   
         // Get the network (channel) our contract is deployed to.
         const network = await gateway.getNetwork(NETWORK_NAME);
-  
+   
         // Get the contract from the network.
         const contract = network.getContract(CONTRACT_ID);
   
