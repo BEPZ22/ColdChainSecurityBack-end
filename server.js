@@ -198,7 +198,7 @@ app.get('/hlf/:empresa', async function (req, res) {
         //     console.log(value.key)
         //   })
         var data = JSON.parse(result.toString())
-        console.log(`Transaction has been evaluated, result data is: ${data[0]}`);
+        console.log(`Transaction has been evaluated, result data is: ${data[0].key}`);
         res.status(200).json({data});
   
     } catch (error) {
