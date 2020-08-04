@@ -8,10 +8,10 @@ const pool = new Pool({
   port: process.env.DATABASE_PORT,
 });
 
-const _createTruck = "SELECT create_truck( $1 , $2 , $3 , $4 , $5 , $6, $7, $8 );";
+const _createTruck = "SELECT create_truck( $1 , $2 , $3 , $4 , $5 , $6, $7, $8 , $9 );";
 const _getTruckByPlate = "SELECT * FROM get_unidad_informacion_by_placa( $1 );";
 const _getAllTrucks = "SELECT * FROM get_unidad_informacion($1 , $2);";
-const _updateTruck = "SELECT update_truck( $1 , $2 , $3 , $4 , $5 , $6, $7, $8);";
+const _updateTruck = "SELECT update_truck( $1 , $2 , $3 , $4 , $5 , $6, $7, $8 , $9);";
 const _deleteTruck = "SELECT delete_truck( $1 );";
 
 module.exports = {
@@ -41,7 +41,7 @@ module.exports = {
   
       createTruck : async function (req, res){
   
-          const { conductor, marca, modelo, placa, ano, capacidad, ruta, nombreComercio } = req.body
+          const { conductor, marca, modelo, placa, ano, capacidad, ruta, nombreComercio ,rubro} = req.body
           try{
             const response = await pool.query( _createTruck , [ conductor, 
                                                                marca, 
@@ -50,7 +50,9 @@ module.exports = {
                                                                ano, 
                                                                capacidad,
                                                                ruta,
-                                                               nombreComercio]);                   
+                                                               nombreComercio,
+                                                               rubro
+                                                              ]);                   
             res.status(200).send({'message':'Unidad creada exitosamente'});
           } catch(error){
             res.status(404).send(error);
@@ -60,7 +62,7 @@ module.exports = {
   
       updateTruck : async function(req, res){
         
-        const { conductor, marca, modelo, placa, ano, capacidad,ruta, placaNueva} = req.body
+        const { conductor, marca, modelo, placa, ano, capacidad,ruta, placaNueva, rubro} = req.body
         try {
           const response = await pool.query(_updateTruck, [ conductor, 
                                                             marca, 
@@ -69,7 +71,9 @@ module.exports = {
                                                             ano, 
                                                             capacidad,
                                                             ruta,
-                                                            placaNueva]);
+                                                            placaNueva,
+                                                            rubro
+                                                          ]);
           res.status(200).send(response.rows);
         } catch (error) {
           res.status(404).send(error);

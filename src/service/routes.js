@@ -5,6 +5,7 @@ const place = require("./Place/placeData");
 const login = require("./Login/Controller/login");
 const commerce = require("./Commerce/commerceData");
 const eslabon = require("./StaticUnit/staticUnit");
+const rubro = require("./Rubro/rubroData");
 const otro = require("./Otros/otros");
 const auth = require("../service/Login/Middleware/authentification")
 
@@ -13,9 +14,13 @@ module.exports = {
     
     assignRoutes : function(app){
         
-        //Arduino
-        // app.get('/arduino', arduino.getData);
-        // app.get('/arduino/addData/:Id/:Lg/:Lt/:Tp/:Dt/:Un/:Wh/:Co/:Ua', arduino.addData);
+        //Rubros
+        app.get('/rubro/:comercio', auth.verifyToken, rubro.getAllRubroByCompany);
+        app.get('/rubro/unidadEstatica/:serial', auth.verifyToken, rubro.getRubroByStaticUnit);
+        app.get('/rubro/unidadTransporte/:placa', auth.verifyToken, rubro.getRubroByTransportUnit);
+        app.post('/rubro', auth.verifyToken, rubro.createRubro);
+        app.put('/rubro', auth.verifyToken, rubro.updateRubro);
+        app.delete('/rubro', auth.verifyToken, rubro.deleteRubro);
         
         //Comercio
         app.get('/comercio/:rol/:comercio', auth.verifyToken, commerce.getAllCommerce);

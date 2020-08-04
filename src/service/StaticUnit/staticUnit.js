@@ -11,8 +11,8 @@ const pool = new Pool({
 
 const _getAllEslabon = "SELECT * FROM get_eslabon_fijo( $1 , $2 );";
 const _getEslabonByIdSerial = "SELECT * FROM get_eslabon_fijo_by_serial_id( $1 );";
-const _createEslabon = "SELECT create_eslabon_fijo( $1 , $2 , $3 , $4 );";
-const _updateEslabon= "Select update_eslabon( $1, $2 , $3 );";
+const _createEslabon = "SELECT create_eslabon_fijo( $1 , $2 , $3 , $4 , $5 , $6 , $7);";
+const _updateEslabon= "Select update_eslabon( $1, $2 , $3, $4);";
 const _deleteEslabon = "SELECT delete_eslabon( $1 );";
 
 module.exports = {
@@ -42,12 +42,16 @@ module.exports = {
 
     createEslabon : async function (req, res){
 
-        const { serialId, tipo, descripcion, nombreAlmacen} = req.body
+        const { serialId, tipo, descripcion, nombreAlmacen, rubro, comercio, comercioL} = req.body
         try{
           const response = await pool.query( _createEslabon , [ serialId,
                                                                  tipo, 
                                                                  descripcion,
-                                                                 nombreAlmacen]);                   
+                                                                 nombreAlmacen,
+                                                                 rubro, 
+                                                                 comercio, 
+                                                                 comercioL
+                                                                ]);                   
           res.status(200).send({'message':'Unidad estatica creada exitosamente'});
         } catch(error){
           res.status(404).send(error);
@@ -57,11 +61,13 @@ module.exports = {
 
     updateEslabon: async function(req, res){
       
-      const { serialId, nombreAlmacenActual, nombreAlmacenEnviar} = req.body
+      const { serialId, nombreAlmacenActual, nombreAlmacenEnviar, rubro} = req.body
       try{
         const response = await pool.query( _updateEslabon , [ serialId,
                                                               nombreAlmacenActual,
-                                                              nombreAlmacenEnviar]);                   
+                                                              nombreAlmacenEnviar,
+                                                              rubro  
+                                                            ]);                   
         res.status(200).send({'message':'Unidad estatica mudada de Almacen'});
       } catch (error) {
         res.status(404).send(error);
