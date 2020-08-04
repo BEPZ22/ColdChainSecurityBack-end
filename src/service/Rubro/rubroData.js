@@ -63,7 +63,7 @@ module.exports = {
                                                                 temp_max, 
                                                                 comercio
                                                               ]);                   
-            res.status(200).send({'message':'Unidad creada exitosamente'});
+            res.status(200).send({'message':'Rubro creado exitosamente'});
           } catch(error){
             res.status(404).send(error);
           }
@@ -91,7 +91,7 @@ module.exports = {
         const { nombre , comercio } = req.body
         try {
           const response = await pool.query(_deleteRubro, [nombre , comercio]);
-          res.status(200).send({'message':'Unidad eliminada exitosamente'});
+          res.status(200).send({'message':'Rubro eliminado exitosamente'});
         } catch (error) {
           res.status(404).send(error);
         }
