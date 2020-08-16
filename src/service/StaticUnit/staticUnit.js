@@ -44,7 +44,7 @@ module.exports = {
     getEslabonByWarehouse : async function(req, res){
       const warehouseName = req.params['warehouseName'];
       try {
-        print(warehouseName);
+        console.log(warehouseName);
         const response = await pool.query(_getEslabonByWarehouse, [ warehouseName ]);
         res.status(200).send(response.rows);
       } catch (error) {
