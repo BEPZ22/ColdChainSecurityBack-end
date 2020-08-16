@@ -11,6 +11,7 @@ const pool = new Pool({
 
 const _getAllEslabon = "SELECT * FROM get_eslabon_fijo( $1 , $2 );";
 const _getEslabonByIdSerial = "SELECT * FROM get_eslabon_fijo_by_serial_id( $1 );";
+const _getEslabonByWarehouse = "SELECT * FROM get_eslabon_by_almacen( $1 );";
 const _createEslabon = "SELECT create_eslabon_fijo( $1 , $2 , $3 , $4 , $5 , $6 , $7);";
 const _updateEslabon= "Select update_eslabon( $1, $2 , $3, $4);";
 const _deleteEslabon = "SELECT delete_eslabon( $1 );";
@@ -33,6 +34,17 @@ module.exports = {
       const idserial = req.params['idserial'];
       try {
         const response = await pool.query(_getEslabonByIdSerial, [ idserial ]);
+        res.status(200).send(response.rows);
+      } catch (error) {
+        res.status(404).send(error);
+      }
+
+    },
+
+    getEslabonByWarehouse : async function(req, res){
+      const warehouseName = req.params['warehouseName'];
+      try {
+        const response = await pool.query(_getEslabonByWarehouse, [ warehouseName ]);
         res.status(200).send(response.rows);
       } catch (error) {
         res.status(404).send(error);
