@@ -41,6 +41,7 @@ module.exports = {
         //Unidad / Transporte Eslabon
         app.get('/unidad/:rol/:comercio', auth.verifyToken, truck.getAllTrucks);
         app.get('/unidad/:placa', auth.verifyToken, truck.getTruckByPlate);
+        app.get('/unidadComercio/:comercio', auth.verifyToken, truck.getTruckByCommerce);
         app.post('/unidad', auth.verifyToken, truck.createTruck);
         app.put('/unidad', auth.verifyToken, truck.updateTruck);
         app.delete('/unidad', auth.verifyToken, truck.deleteTruck);

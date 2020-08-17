@@ -11,6 +11,7 @@ const pool = new Pool({
 const _createTruck = "SELECT create_truck( $1 , $2 , $3 , $4 , $5 , $6, $7, $8 , $9 );";
 const _getTruckByPlate = "SELECT * FROM get_unidad_informacion_by_placa( $1 );";
 const _getAllTrucks = "SELECT * FROM get_unidad_informacion($1 , $2);";
+const _getTruckByCommerce = "SELECT * FROM get_unidad_by_comercio( $1 );";
 const _updateTruck = "SELECT update_truck( $1 , $2 , $3 , $4 , $5 , $6, $7, $8 , $9);";
 const _deleteTruck = "SELECT delete_truck( $1 );";
 
@@ -38,7 +39,18 @@ module.exports = {
         }
   
       },
+      
+      getTruckByCommerce : async function(req, res){
+        const commerce = req.params['comercio'];
+        try {
+          const response = await pool.query(_getTruckByCommerce, [commerce]);
+          res.status(200).send(response.rows);
+        } catch (error) {
+          res.status(404).send(error);
+        }
   
+      },
+
       createTruck : async function (req, res){
   
           const { conductor, marca, modelo, placa, ano, capacidad, ruta, nombreComercio ,rubro} = req.body
