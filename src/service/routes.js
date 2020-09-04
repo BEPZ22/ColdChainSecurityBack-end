@@ -16,6 +16,8 @@ module.exports = {
         
         //Rubros
         app.get('/rubro/:comercio', auth.verifyToken, rubro.getAllRubroByCompany);
+        app.get('/rubro/id/:id',auth.verifyToken, rubro.getRubroById);
+        app.get('/rubro/:nombre/:id_comercio')
         app.get('/rubro/unidadEstatica/:serial', auth.verifyToken, rubro.getRubroByStaticUnit);
         app.get('/rubro/unidadTransporte/:placa', auth.verifyToken, rubro.getRubroByTransportUnit);
         app.post('/rubro', auth.verifyToken, rubro.createRubro);
