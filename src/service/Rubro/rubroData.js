@@ -54,8 +54,10 @@ module.exports = {
   
     getRubroByStaticUnit : async function(req, res){
         const serial_id = req.params['serial'];
+        console.log(serial_id + "  Antes del try")
         try {
-          const response = await pool.query(_getRubroByStaticUnit, [serial_id.toString()]);
+          console.log(serial_id + "  Drento del try")
+          const response = await pool.query(_getRubroByStaticUnit, [serial_id]);
           res.status(200).send(response.rows);
         } catch (error) {
           res.status(404).send(error);
@@ -66,8 +68,10 @@ module.exports = {
         
       getRubroByTransportUnit : async function(req, res){
         const placa = req.params['placa'];
+        console.log(placa+ "  Antes del try")
         try {
-          const response = await pool.query(_getRubroByTransportcUnit, [placa.toString()]);
+          console.log(placa+ "  Drento del try")
+          const response = await pool.query(_getRubroByTransportcUnit, [placa]);
           res.status(200).send(response.rows);
         } catch (error) {
           res.status(404).send(error);
