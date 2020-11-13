@@ -36,7 +36,7 @@ module.exports = {
         //Usuario
         app.get('/usuario/:rol/:comercio', auth.verifyToken, user.getAllUsers);
         app.get('/usuario/:cedula', auth.verifyToken, user.getUserByID);
-        app.post('/usuario', auth.verifyToken, user.createUser);
+        app.post('/usuario', user.createUser);
         app.put('/usuario', auth.verifyToken, user.updateUser);
         app.delete('/usuario', auth.verifyToken, user.deleteUser);
 
