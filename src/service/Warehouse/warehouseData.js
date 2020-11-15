@@ -68,6 +68,7 @@ module.exports = {
   
           const { nombre, avenida, calle, zona, edificio, apartamento, nro_apartameto, casa, nro_casa, lugar, comercio } = req.body
           try{
+            console.log(nombre, avenida, calle, zona, edificio, apartamento, nro_apartameto, casa, nro_casa, lugar, comercio)
             const response = await pool.query( _createWarehouse , [ nombre, 
                                                                 avenida, 
                                                                 calle, 
